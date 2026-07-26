@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teaching Artifacts 2025–26 · Àngels Trias i Valls</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0a;
+    --card: #141414;
+    --card-border: #252525;
+    --text: #f2ece0;
+    --muted: #9a958a;
+    --sel619: #f5a623;
+    --sel520: #34d399;
+    --mdc: #ec4899;
+    --per702: #818cf8;
+    --support: #22d3ee;
+    --pedagogy: #c084fc;
+    --programme: #e8c39a;
+    --platform: #fb7185;
+    --inclusion: #a78bfa;
+    --ethnography: #38bdf8;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 20px 100px;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .container { max-width: 1020px; margin: 0 auto; }
+
+  /* ───── HERO ───── */
+  .hero {
+    text-align: center;
+    padding: 90px 20px 70px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%; left: 50%; transform: translateX(-50%);
+    width: 720px; height: 720px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(52,211,153,0.10) 0%, rgba(236,72,153,0.06) 45%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: .8em;
+    text-transform: uppercase;
+    letter-spacing: .3em;
+    color: var(--muted);
+    margin-bottom: 22px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4em, 7vw, 4.6em);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+  .hero h1 .accent-line {
+    display: block;
+    background: linear-gradient(92deg, var(--sel619), var(--sel520) 30%, var(--mdc) 62%, var(--per702));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    margin: 26px auto 0;
+    max-width: 620px;
+    color: var(--muted);
+    font-size: 1.05em;
+    position: relative;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 44px;
+    margin-top: 46px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.2em;
+    font-weight: 700;
+  }
+  .stat-label {
+    font-size: .72em;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ───── FILTER BAR ───── */
+  .filters {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 16px 0;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .filter-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: .82em;
+    font-weight: 500;
+    letter-spacing: .04em;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .filter-btn:hover { color: var(--text); border-color: #3a3a3a; }
+  .filter-btn:focus-visible { outline: 2px solid var(--sel520); outline-offset: 2px; }
+  .filter-btn.active {
+    color: #0a0a0a;
+    background: var(--text);
+    border-color: var(--text);
+  }
+
+  /* ───── MODULE SECTIONS ───── */
+  .module {
+    margin: 80px 0 0;
+    position: relative;
+  }
+  .module-head {
+    position: relative;
+    padding: 34px 0 26px;
+    margin-bottom: 6px;
+    overflow: hidden;
+  }
+  .module-code-ghost {
+    position: absolute;
+    top: 50%; right: -8px;
+    transform: translateY(-50%);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(4.5em, 13vw, 9em);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    opacity: .09;
+    white-space: nowrap;
+    pointer-events: none;
+    line-height: 1;
+  }
+  .module-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: .78em;
+    text-transform: uppercase;
+    letter-spacing: .26em;
+    margin-bottom: 10px;
+  }
+  .module-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.5em, 3.4vw, 2.1em);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    max-width: 70%;
+  }
+  .module-note {
+    color: var(--muted);
+    font-size: .9em;
+    margin-top: 8px;
+    max-width: 64%;
+  }
+
+  /* per-module accents */
+  .m-sel619 .module-label, .m-sel619 .module-code-ghost { color: var(--sel619); }
+  .m-sel520 .module-label, .m-sel520 .module-code-ghost { color: var(--sel520); }
+  .m-mdc    .module-label, .m-mdc .module-code-ghost    { color: var(--mdc); }
+  .m-per702 .module-label, .m-per702 .module-code-ghost { color: var(--per702); }
+  .m-support .module-label, .m-support .module-code-ghost { color: var(--support); }
+  .m-pedagogy .module-label, .m-pedagogy .module-code-ghost { color: var(--pedagogy); }
+  .m-programme .module-label, .m-programme .module-code-ghost { color: var(--programme); }
+  .m-platform .module-label, .m-platform .module-code-ghost { color: var(--platform); }
+
+  .m-sel619 .card:hover { border-color: var(--sel619); }
+  .m-sel520 .card:hover { border-color: var(--sel520); }
+  .m-mdc .card:hover { border-color: var(--mdc); }
+  .m-per702 .card:hover { border-color: var(--per702); }
+  .m-support .card:hover { border-color: var(--support); }
+  .m-pedagogy .card:hover { border-color: var(--pedagogy); }
+  .m-programme .card:hover { border-color: var(--programme); }
+  .m-platform .card:hover { border-color: var(--platform); }
+
+  .m-sel619 .card-tag { color: var(--sel619); }
+  .m-sel520 .card-tag { color: var(--sel520); }
+  .m-mdc .card-tag { color: var(--mdc); }
+  .m-per702 .card-tag { color: var(--per702); }
+  .m-support .card-tag { color: var(--support); }
+  .m-pedagogy .card-tag { color: var(--pedagogy); }
+  .m-programme .card-tag { color: var(--programme); }
+  .m-platform .card-tag { color: var(--platform); }
+  .m-inclusion .module-label, .m-inclusion .module-code-ghost { color: var(--inclusion); }
+  .m-inclusion .card:hover { border-color: var(--inclusion); }
+  .m-inclusion .card-tag { color: var(--inclusion); }
+  .m-ethnography .module-label, .m-ethnography .module-code-ghost { color: var(--ethnography); }
+  .m-ethnography .card:hover { border-color: var(--ethnography); }
+  .m-ethnography .card-tag { color: var(--ethnography); }
+
+  /* ───── CARD GRID ───── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(0,0,0,0.45);
+  }
+  .card-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: .72em;
+    font-weight: 600;
+    letter-spacing: .06em;
+  }
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.06em;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .card-title a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease;
+  }
+  .card-title a:hover { border-bottom-color: currentColor; }
+  .card-title a:focus-visible { outline: 2px solid var(--sel520); outline-offset: 2px; }
+  .card-desc {
+    color: var(--muted);
+    font-size: .9em;
+    line-height: 1.55;
+    flex-grow: 1;
+  }
+  .card-links {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .card-links a {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: .76em;
+    font-weight: 500;
+    letter-spacing: .04em;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px dotted #3a3a3a;
+    transition: color .2s ease;
+  }
+  .card-links a:hover { color: var(--text); }
+
+  .card.hidden { display: none; }
+  .module.empty { display: none; }
+
+  /* ───── FOOT NOTE ───── */
+  .footnote {
+    margin-top: 100px;
+    padding-top: 34px;
+    border-top: 1px solid var(--card-border);
+    color: var(--muted);
+    font-size: .88em;
+    max-width: 720px;
+  }
+  .footnote strong { color: var(--text); font-weight: 600; }
+
+  @media (max-width: 880px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .module-title, .module-note { max-width: 100%; }
+  }
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: 1fr; }
+    .hero { padding: 60px 10px 50px; }
+    .hero-stats { gap: 26px; }
+    .module-code-ghost { font-size: 4em; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card, .filter-btn, .card-title a { transition: none; }
+    .card:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow">Àngels Trias i Valls · Regent's University London · 2025–26</div>
+    <h1>A Year of Building<span class="accent-line">in the Classroom, with AI</span></h1>
+    <p class="hero-sub">Interactive activities, simulations, deployed apps, agendas, decks and documents built across six modules, one platform and a year of teaching.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num" id="stat-count">0</div><div class="stat-label">Artifacts</div></div>
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label">Modules &amp; programmes</div></div>
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label">Deployed apps</div></div>
+      <div class="stat"><div class="stat-num">12</div><div class="stat-label">Months</div></div>
+    </div>
+  </header>
+
+  <!-- FILTERS -->
+  <nav class="filters" aria-label="Filter artifacts by type">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="interactive">#Interactive</button>
+    <button class="filter-btn" data-filter="app">#DeployedApp</button>
+    <button class="filter-btn" data-filter="agenda">#Agenda</button>
+    <button class="filter-btn" data-filter="deck">#Deck</button>
+    <button class="filter-btn" data-filter="activity">#Activity</button>
+    <button class="filter-btn" data-filter="document">#Document</button>
+  </nav>
+
+  <!-- ═══════ SEL619 ═══════ -->
+  <section class="module m-sel619">
+    <div class="module-head">
+      <div class="module-code-ghost">SEL619</div>
+      <div class="module-label">SEL619</div>
+      <h2 class="module-title">Blockchain and Cryptocurrency Revolution</h2>
+      <p class="module-note">The most heavily built module of the year, from campus treasure hunts to critical card-sorting games.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="interactive app">
+        <div class="card-tag">#Interactive #DeployedApp</div>
+        <div class="card-title"><a href="https://eth-treasure-hunt.vercel.app" target="_blank" rel="noopener">Ethereum Campus Treasure Hunt</a></div>
+        <div class="card-desc">Five-station campus hunt covering SHA-256, the Genesis Block and cypherpunk philosophy, ending in a POAP reward mint.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/2cf29d95-a30a-4b00-9138-66bb116f073e" target="_blank" rel="noopener">Chat</a><a href="https://eth-treasure-hunt.vercel.app" target="_blank" rel="noopener">Live</a></div>
+      </div>
+
+      <div class="card" data-type="interactive app">
+        <div class="card-tag">#Interactive #DeployedApp</div>
+        <div class="card-title"><a href="https://dao-sim.netlify.app" target="_blank" rel="noopener">DAO Simulator</a></div>
+        <div class="card-desc">Students experience decentralised governance by proposing and voting, with a Figma activity and tutor guide alongside.</div>
+        <div class="card-links"><a href="https://dao-sim.netlify.app" target="_blank" rel="noopener">Live</a></div>
+      </div>
+
+      <div class="card" data-type="interactive activity">
+        <div class="card-tag">#Interactive #Activity</div>
+        <div class="card-title"><a href="https://claude.ai/chat/2b775b8e-ccb7-4e9d-83ea-c90a0d855b49" target="_blank" rel="noopener">Whose Paradox? Card-Sorting Game</a></div>
+        <div class="card-desc">Eight real blockchain cases, Worldcoin to the digital yuan, sorted as liberatory or carceral, each flipping to reveal the scholarly reading.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/2b775b8e-ccb7-4e9d-83ea-c90a0d855b49" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive activity">
+        <div class="card-tag">#Interactive #Activity</div>
+        <div class="card-title"><a href="https://claude.ai/chat/dc0cd52e-ba14-4a58-8f0d-f76bc055997f" target="_blank" rel="noopener">SHA-256 In-Class Hashing Activity</a></div>
+        <div class="card-desc">Fifteen-minute hands-on exercise where students discover determinism, the avalanche effect and one-way hashing for themselves.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/dc0cd52e-ba14-4a58-8f0d-f76bc055997f" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive #Simulation</div>
+        <div class="card-title"><a href="https://claude.ai/chat/38ebadf8-bace-4c9d-a5f0-553e912ecbdf" target="_blank" rel="noopener">Bitcoin Trading Simulation: May 2021</a></div>
+        <div class="card-desc">Historical scenario on volatility and trading psychology with decision points and password-protected outcome reveals.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/38ebadf8-bace-4c9d-a5f0-553e912ecbdf" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive #Simulation</div>
+        <div class="card-title"><a href="https://claude.ai/chat/59ecf857-eb11-40a5-a2b5-6aba8daf82cb" target="_blank" rel="noopener">Bitcoin Trading Simulation: COVID Crash</a></div>
+        <div class="card-desc">March 2020 market collapse as a decision-making task, reading sentiment and bias under pressure.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/59ecf857-eb11-40a5-a2b5-6aba8daf82cb" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive</div>
+        <div class="card-title"><a href="https://claude.ai/chat/29f0233d-41db-4a5d-89b7-32ae1d5d14ed" target="_blank" rel="noopener">Crypto Compass</a></div>
+        <div class="card-desc">Trading and investment education tool with a risk-assessment slider, styled to sit quietly inside Blackboard.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/29f0233d-41db-4a5d-89b7-32ae1d5d14ed" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive #Series</div>
+        <div class="card-title"><a href="https://claude.ai/chat/d171a92c-a3c5-45bf-b547-d6e4b7fbb254" target="_blank" rel="noopener">Crypto Trading Psychology, 3-Session Series</a></div>
+        <div class="card-desc">Anchoring, FOMO and certainty bias taught through a hype-cycle simulation, detective worksheets and consolidation.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/d171a92c-a3c5-45bf-b547-d6e4b7fbb254" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive activity">
+        <div class="card-tag">#Interactive #Activity</div>
+        <div class="card-title">Real or Myth Quiz</div>
+        <div class="card-desc">Rapid-fire claim-testing quiz used to open critical discussion, a format reused across modules.</div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive</div>
+        <div class="card-title">Blockchain Topics for Presentations</div>
+        <div class="card-desc">Decision-tree tool comparing seven chains across consensus, use cases and trade-offs, built for project choice.</div>
+      </div>
+
+      <div class="card" data-type="activity">
+        <div class="card-tag">#Activity</div>
+        <div class="card-title"><a href="https://claude.ai/chat/1fae8192-116a-4ec3-bcdb-bc5e3bc48bf7" target="_blank" rel="noopener">Smart Contract: Pledge</a></div>
+        <div class="card-desc">Groups encode their project commitments in WHEN→THEN logic and upload to Padlet for recognition and marks.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/1fae8192-116a-4ec3-bcdb-bc5e3bc48bf7" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive #MicroLecture</div>
+        <div class="card-title">Smart Contracts Micro-Lecture</div>
+        <div class="card-desc">Navigable HTML presentation on contract languages, security and applications, grounded in peer-reviewed sources.</div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title">Week 2 Agenda: Welcome and Recap</div>
+        <div class="card-desc">Opening session agenda setting out technical, philosophical and practical strands of the module.</div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title"><a href="https://claude.ai/chat/1fae8192-116a-4ec3-bcdb-bc5e3bc48bf7" target="_blank" rel="noopener">Week 5 Agenda: Beyond Bitcoin, Ethereum</a></div>
+        <div class="card-desc">Session plan threading the treasure hunt, 1:1 project meetings and the Smart Contract: Pledge activity.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/1fae8192-116a-4ec3-bcdb-bc5e3bc48bf7" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title"><a href="https://claude.ai/chat/a193237d-670c-45a1-ba06-a8bd63dc0bed" target="_blank" rel="noopener">Week 6 Agenda: DAOs and the Wild West</a></div>
+        <div class="card-desc">Restructured session moving from crypto psychology into mining and a poster-micro-lecture introduction to DAOs.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/a193237d-670c-45a1-ba06-a8bd63dc0bed" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="deck">
+        <div class="card-tag">#Deck</div>
+        <div class="card-title">NFT Lecture Rebuild, 30 Slides</div>
+        <div class="card-desc">Full redesign with new case studies, Gorillaz, Nas and Royal, Starbucks Odyssey, plus academic extension slides.</div>
+      </div>
+
+      <div class="card" data-type="deck">
+        <div class="card-tag">#Deck</div>
+        <div class="card-title"><a href="https://claude.ai/chat/b0b8ff21-c13e-4fff-9d5d-a9af2b1af7fa" target="_blank" rel="noopener">Week 11–12 Deck, Split Edition</a></div>
+        <div class="card-desc">Thirteen dense slides surgically split into twenty-one, preserving every word and image across the pairs.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/b0b8ff21-c13e-4fff-9d5d-a9af2b1af7fa" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="deck">
+        <div class="card-tag">#Deck</div>
+        <div class="card-title"><a href="https://claude.ai/chat/2b775b8e-ccb7-4e9d-83ea-c90a0d855b49" target="_blank" rel="noopener">Week 11–12 Deck, Visual Rebalance</a></div>
+        <div class="card-desc">Sparse slides restored to the full template, text rebalanced and suggested wording marked in red for review.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/2b775b8e-ccb7-4e9d-83ea-c90a0d855b49" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document</div>
+        <div class="card-title">Advanced Blockchain Lesson</div>
+        <div class="card-desc">Reference guide to architecture and consensus, DAGs, sharding, state channels and cross-chain interoperability.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #SessionPlan</div>
+        <div class="card-title">Decentralised Platforms, 40-Minute Session</div>
+        <div class="card-desc">Micro-lecture and student-led analysis game comparing Twitter, Mastodon and Bluesky on the governance trilemma.</div>
+      </div>
+
+      <div class="card" data-type="activity document">
+        <div class="card-tag">#Activity #SessionGuide</div>
+        <div class="card-title">Week 9 Activity Guide: NFTs for Social Good (grey edition)</div>
+        <div class="card-desc">Clean grey-aesthetic HTML with opening hook, two-session content, worksheets, facilitator notes, discussion prompts and metaverse closing.</div>
+      </div>
+
+      <div class="card" data-type="deck">
+        <div class="card-tag">#Deck</div>
+        <div class="card-title">Week 9 Deck: NFTs for Social Good</div>
+        <div class="card-desc">15-slide purple and blue gradient deck covering both sessions, all activities, and a metaverse preview closing.</div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive #MicroLectures</div>
+        <div class="card-title"><a href="https://claude.ai/chat/ee35b38c-954e-4894-bd2f-76b4ddbb51eb" target="_blank" rel="noopener">DAO and Solana Micro-Lectures</a></div>
+        <div class="card-desc">Paired HTML micro-lectures built in a single Sunday session alongside an updated agenda and tutor guide.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/ee35b38c-954e-4894-bd2f-76b4ddbb51eb" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive app">
+        <div class="card-tag">#Interactive #App</div>
+        <div class="card-title"><a href="https://claude.ai/chat/ee35b38c-954e-4894-bd2f-76b4ddbb51eb" target="_blank" rel="noopener">Live Voting App and DAO Proposals Picker</a></div>
+        <div class="card-desc">In-class voting tool and proposal picker letting students experience DAO decision-making as participants.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/ee35b38c-954e-4894-bd2f-76b4ddbb51eb" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive #Tool</div>
+        <div class="card-title"><a href="https://claude.ai/chat/ee35b38c-954e-4894-bd2f-76b4ddbb51eb" target="_blank" rel="noopener">Know Your Project Tool</a></div>
+        <div class="card-desc">Guides groups through articulating their blockchain venture, ending with a generated Figma prompt for their build.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/ee35b38c-954e-4894-bd2f-76b4ddbb51eb" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ SEL520 / SEL513 ═══════ -->
+  <section class="module m-sel520">
+    <div class="module-head">
+      <div class="module-code-ghost">SEL520</div>
+      <div class="module-label">SEL520 · SEL513</div>
+      <h2 class="module-title">Why We Post: Social Media and Us</h2>
+      <p class="module-note">Bento agendas, verified celebrity quizzes and a resit pack engineered to close every loophole.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="interactive activity">
+        <div class="card-tag">#Interactive #Activity</div>
+        <div class="card-title"><a href="https://claude.ai/chat/261dfa24-41c0-4ede-b73f-dbb7f801bc83" target="_blank" rel="noopener">Celebrity Endorsement Accordion</a></div>
+        <div class="card-desc">Six web-verified celebrity and brand pairings, Olivia Rodrigo to BLACKPINK, with answers revealed on click.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/261dfa24-41c0-4ede-b73f-dbb7f801bc83" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive #Slides</div>
+        <div class="card-title"><a href="https://claude.ai/chat/f003cecc-5103-4c40-bc93-8a63611bd456" target="_blank" rel="noopener">Data Colonialism Supplementary Slides</a></div>
+        <div class="card-desc">Three-slide mobile-friendly switcher extending the theory, Miller, who benefits, and a build task.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/f003cecc-5103-4c40-bc93-8a63611bd456" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="activity">
+        <div class="card-tag">#Activity #Example</div>
+        <div class="card-title"><a href="https://claude.ai/chat/3000e7f1-e507-4739-bcee-ef7ca26025a9" target="_blank" rel="noopener">Zendaya Identity Mapping Example</a></div>
+        <div class="card-desc">Padlet mock-up mapping personal, professional and aspirational identities, with live links and current audience comments.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/3000e7f1-e507-4739-bcee-ef7ca26025a9" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="activity">
+        <div class="card-tag">#Activity #Session</div>
+        <div class="card-title">Week 8 Activism Session Pack</div>
+        <div class="card-desc">Real or Myth quiz, protest formula poster builder and a Postill-based Freedom Technologist activity in one session.</div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title">Week 2 Bento Agenda</div>
+        <div class="card-desc">The original dark bento format, Space Grotesk and gradient hero, that became the module's visual language.</div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title">Week 5 Bento Agenda: Self-Presentation</div>
+        <div class="card-desc">Selfie culture, privilege and intersectionality session in the established card grid.</div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title"><a href="https://claude.ai/chat/ee35b38c-954e-4894-bd2f-76b4ddbb51eb" target="_blank" rel="noopener">Week 8 Bento Agenda: Activism</a></div>
+        <div class="card-desc">The green variant, hashtag tags and larger type, with after-class podcast and reading links built in.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/ee35b38c-954e-4894-bd2f-76b4ddbb51eb" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title"><a href="https://claude.ai/chat/4e021e6a-8bdd-48c8-947c-0353a529017e" target="_blank" rel="noopener">Week 10 Bento Agenda: Influencers</a></div>
+        <div class="card-desc">Identity, influencers and celebrity activism in a uniform three-column grid, content exactly as taught.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/4e021e6a-8bdd-48c8-947c-0353a529017e" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #PDF</div>
+        <div class="card-title"><a href="https://claude.ai/chat/f003cecc-5103-4c40-bc93-8a63611bd456" target="_blank" rel="noopener">Anonymised Data Colonialism Deck</a></div>
+        <div class="card-desc">Colleague's slides surgically anonymised at PDF level, name overlay matched to the original background.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/f003cecc-5103-4c40-bc93-8a63611bd456" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Rubric</div>
+        <div class="card-title"><a href="https://claude.ai/chat/2a02fd94-9612-4640-a542-0ab77680a87f" target="_blank" rel="noopener">Five-Band Marking Rubric</a></div>
+        <div class="card-desc">Community, analysis, theory and media bands built from real outcome patterns in the cohort's submissions.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/2a02fd94-9612-4640-a542-0ab77680a87f" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document deck">
+        <div class="card-tag">#Document #Deck #Poster</div>
+        <div class="card-title"><a href="https://claude.ai/chat/73fedc91-8c95-4844-adc6-460af1de8513" target="_blank" rel="noopener">SEL513 Resit Pack, Three Formats</a></div>
+        <div class="card-desc">Identical loophole-proof wording delivered as a Word table, a one-page poster and a slide deck, plus the email.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/73fedc91-8c95-4844-adc6-460af1de8513" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="activity">
+        <div class="card-tag">#Activity #Session</div>
+        <div class="card-title"><a href="https://claude.ai/chat/f1f538cf-091a-4ab1-a365-336bd48c394d" target="_blank" rel="noopener">Wellness Community Session</a></div>
+        <div class="card-desc">Belle Gibson, conspirituality and the Purity Paradigm in three learning activities, anchored in the Outernet ethnographic trip.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/f1f538cf-091a-4ab1-a365-336bd48c394d" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document deck">
+        <div class="card-tag">#Document #Deck #Scaffold</div>
+        <div class="card-title"><a href="https://claude.ai/chat/2458f1fd-69e6-433e-949e-808a7625dc04" target="_blank" rel="noopener">Digital Ethnography Tutorial Pack</a></div>
+        <div class="card-desc">Self-audit checklist, community research sheets, a Pechakucha design guide and a 26-slide planning template, printable and fillable.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/2458f1fd-69e6-433e-949e-808a7625dc04" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive activity">
+        <div class="card-tag">#Interactive #Quiz</div>
+        <div class="card-title"><a href="https://claude.ai/chat/8cfe90a0-93f9-40b3-a9cd-40b6df88a2e7" target="_blank" rel="noopener">Asian Celebrity Endorsement Quiz</a></div>
+        <div class="card-desc">Six verified Japanese campaigns, Tommy Lee Jones for Boss Coffee onwards, two celebrities per product with campaign and year reveals.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/8cfe90a0-93f9-40b3-a9cd-40b6df88a2e7" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive activity">
+        <div class="card-tag">#Interactive #Activity</div>
+        <div class="card-title"><a href="https://claude.ai/chat/ee35b38c-954e-4894-bd2f-76b4ddbb51eb" target="_blank" rel="noopener">15 Findings, Interactive Edition</a></div>
+        <div class="card-desc">Miller's Why We Post findings reworked from a static list into an interactive completion activity for Week 7.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/ee35b38c-954e-4894-bd2f-76b4ddbb51eb" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive app">
+        <div class="card-tag">#Interactive #App</div>
+        <div class="card-title"><a href="https://claude.ai/chat/8b30246c-7c50-4012-b7d8-1d260cc60572" target="_blank" rel="noopener">Student-Teacher Chat System</a></div>
+        <div class="card-desc">WhatsApp-style messaging with a teacher dashboard, unread indicators, search and categorised student questions.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/8b30246c-7c50-4012-b7d8-1d260cc60572" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ DIGITAL MEDIA ═══════ -->
+  <section class="module m-support">
+    <div class="module-head">
+      <div class="module-code-ghost">MEDIA</div>
+      <div class="module-label">Digital Media and Creativity</div>
+      <h2 class="module-title">Digital Media, AI Content and Podcasting</h2>
+      <p class="module-note">The BA media journey from AI content creation to the podcasting studio.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title">Week 2 Agenda: Digital Media and AI Content Creation</div>
+        <div class="card-desc">Grey and pastel design covering creative expression, Adobe Express, ChatGPT and Midjourney, and podcasting prep.</div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda #Overview</div>
+        <div class="card-title">Week 3: Sensing Technologies Overview</div>
+        <div class="card-desc">Course structure for AI, IoT, 3D printing and imaging as enabling technologies.</div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title"><a href="https://claude.ai/chat/238a8f51-456a-4ee9-8054-21fc435fce8d" target="_blank" rel="noopener">Week 5 Agenda: Digital Creativity and Podcasting</a></div>
+        <div class="card-desc">AI in content creation and podcasting theory, leading into the hands-on studio session the following week.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/238a8f51-456a-4ee9-8054-21fc435fce8d" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive document">
+        <div class="card-tag">#Interactive #Resource</div>
+        <div class="card-title"><a href="https://claude.ai/chat/e7352725-57d5-44aa-bdd0-3977bc2c055f" target="_blank" rel="noopener">30+ Podcast Topics Guide</a></div>
+        <div class="card-desc">Student topic menu with trending and viral badges, updated with current debates from POV narratives to platform regulation.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/e7352725-57d5-44aa-bdd0-3977bc2c055f" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title">Week 4 Agenda: Podcasting Masterclass</div>
+        <div class="card-desc">Session agenda styled after the Week 3 format, covering the podcasting masterclass schedule and the AI Media Creation activity.</div>
+      </div>
+
+      <div class="card" data-type="document activity">
+        <div class="card-tag">#Document #Handout</div>
+        <div class="card-title">Remix Challenge Student Handout</div>
+        <div class="card-desc">Full student-facing handout with theory, instructions, discussion questions, reflection prompts and grading rubric for the Remix Challenge.</div>
+      </div>
+
+      <div class="card" data-type="deck">
+        <div class="card-tag">#Deck #Content</div>
+        <div class="card-title">Remix Challenge Slide Content</div>
+        <div class="card-desc">20-slide structured Markdown deck with all presentation content for the Remix Challenge session.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Padlet</div>
+        <div class="card-title">Remix Challenge Padlet Labels</div>
+        <div class="card-desc">Direct-address section headings for the Padlet board, written in the second person to prompt student engagement.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ PGCHE ═══════ -->
+  <section class="module m-pedagogy">
+    <div class="module-head">
+      <div class="module-code-ghost">PGCHE</div>
+      <div class="module-label">PGCHE</div>
+      <h2 class="module-title">Postgraduate Certificate in Higher Education</h2>
+      <p class="module-note">Teaching the teachers: session design, portfolio assessment and programme stewardship with Nuria.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="activity document">
+        <div class="card-tag">#Activity #SessionPack</div>
+        <div class="card-title"><a href="https://claude.ai/chat/2179b0f4-270c-47b2-a839-5913b677af99" target="_blank" rel="noopener">Group Dynamics Session, Eight Files</a></div>
+        <div class="card-desc">The PGCHE Group Island collective drawing, Through Different Eyes scenarios, quote cards and portfolio triads, as a master page plus eight standalone files.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/2179b0f4-270c-47b2-a839-5913b677af99" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Framework</div>
+        <div class="card-title"><a href="https://claude.ai/chat/16ff5c13-7929-49c3-872c-2896ea7aa80b" target="_blank" rel="noopener">10 MLO Assessment Framework</a></div>
+        <div class="card-desc">Meeting, broadly meeting, not meeting structure across ten teaching competencies, the basis for all portfolio assessments.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/16ff5c13-7929-49c3-872c-2896ea7aa80b" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Assessment</div>
+        <div class="card-title"><a href="https://claude.ai/chat/b167d7b4-da89-4b7a-9984-0023480edc88" target="_blank" rel="noopener">Portfolio Assessments and Margin Notes</a></div>
+        <div class="card-desc">Detailed page-by-page MLO feedback for PGCHE candidates, positive notes paired with development notes throughout.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/b167d7b4-da89-4b7a-9984-0023480edc88" target="_blank" rel="noopener">Chat</a><a href="https://claude.ai/chat/16ff5c13-7929-49c3-872c-2896ea7aa80b" target="_blank" rel="noopener">Joshua</a><a href="https://claude.ai/chat/e7abdea1-4fa0-409b-8edb-2933d6c888e3" target="_blank" rel="noopener">Eddie</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Review</div>
+        <div class="card-title"><a href="https://claude.ai/chat/39c971ae-b707-4441-9a3b-18d841e5d7e3" target="_blank" rel="noopener">Programme Review Documentation</a></div>
+        <div class="card-desc">End-of-year review meeting captured and structured, succession planning, facilitation staffing, mentor hours and authentication of practice.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/39c971ae-b707-4441-9a3b-18d841e5d7e3" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Session</div>
+        <div class="card-title"><a href="https://claude.ai/chat/2d907ae6-3c71-49f8-a922-a88e077d1666" target="_blank" rel="noopener">Observation of Practice Session</a></div>
+        <div class="card-desc">Session overview and reading list, Gosling on peer review, MacFarlane on freedom to learn, Koskina on the psychological contract.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/2d907ae6-3c71-49f8-a922-a88e077d1666" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive app">
+        <div class="card-tag">#Interactive #DeployedApp #React</div>
+        <div class="card-title"><a href="https://claude.ai/chat/303aff91-550a-437a-9bd3-6f3ea5501c9f" target="_blank" rel="noopener">Reflective Reader v2</a></div>
+        <div class="card-desc">Nine-screen React app with live AI dialogue, embedded Figure 1, and a printable reflective journal, deployed on Vercel with a serverless API proxy.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/303aff91-550a-437a-9bd3-6f3ea5501c9f" target="_blank" rel="noopener">Chat (v2)</a><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Chat (v1 + spec)</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Spec</div>
+        <div class="card-title"><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Reflective Reader Build Spec</a></div>
+        <div class="card-desc">Full pedagogical rationale and decision document written to carry the design across sessions, covering every screen and AI interaction choice.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════ DIGITAL ETHNOGRAPHY ═══════ -->
+  <section class="module m-ethnography">
+    <div class="module-head">
+      <div class="module-code-ghost">ETHNO</div>
+      <div class="module-label">Digital Ethnography</div>
+      <h2 class="module-title">Digital Ethnography Module</h2>
+      <p class="module-note">Sarah Pink, Markham and Hine translated into session design, activity sheets and a bento agenda, built across a dedicated project.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #SessionPlan</div>
+        <div class="card-title"><a href="https://claude.ai/chat/3a434ad7-b7e6-4508-a741-312aebca82cd" target="_blank" rel="noopener">Digital Ethnography Session Plan</a></div>
+        <div class="card-desc">Comprehensive session plan with activities, the Sarah Pink case study, a curated reading list and full session flow.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/3a434ad7-b7e6-4508-a741-312aebca82cd" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="deck">
+        <div class="card-tag">#Deck #Verbatim</div>
+        <div class="card-title"><a href="https://claude.ai/chat/cbb95c9a-c181-4c63-b4cd-87444c0ec2ec" target="_blank" rel="noopener">Digital Ethnography Lecture Deck</a></div>
+        <div class="card-desc">PPTX built verbatim from lecture transcript, covering the principles of digital ethnography without losing a word.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/cbb95c9a-c181-4c63-b4cd-87444c0ec2ec" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda</div>
+        <div class="card-title"><a href="https://claude.ai/chat/cbb95c9a-c181-4c63-b4cd-87444c0ec2ec" target="_blank" rel="noopener">Week 3 Bento Agenda: Digital Ethnography</a></div>
+        <div class="card-desc">Bento-grid session agenda with activity cards and a central guiding question, iterated through several revisions in the same chat.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/cbb95c9a-c181-4c63-b4cd-87444c0ec2ec" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive document">
+        <div class="card-tag">#Document #ReadingList</div>
+        <div class="card-title"><a href="https://claude.ai/chat/cbb95c9a-c181-4c63-b4cd-87444c0ec2ec" target="_blank" rel="noopener">Readings: Digital Ethnography</a></div>
+        <div class="card-desc">Styled HTML reading list featuring Pink et al., Markham and Hine, with a terracotta colour revision applied later in the same chat.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/cbb95c9a-c181-4c63-b4cd-87444c0ec2ec" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="activity">
+        <div class="card-tag">#Activity</div>
+        <div class="card-title"><a href="https://claude.ai/chat/cbb95c9a-c181-4c63-b4cd-87444c0ec2ec" target="_blank" rel="noopener">Activity: Paired Participant Observation</a></div>
+        <div class="card-desc">Guides students through a three-role interview rotation exercise, observer, participant and note-taker cycling through positions.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/cbb95c9a-c181-4c63-b4cd-87444c0ec2ec" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="activity">
+        <div class="card-tag">#Activity</div>
+        <div class="card-title"><a href="https://claude.ai/chat/cbb95c9a-c181-4c63-b4cd-87444c0ec2ec" target="_blank" rel="noopener">Activity: First Five Steps into an Online Community</a></div>
+        <div class="card-desc">Structured sheet for choosing a community and planning the first five research moves, bridging theory into fieldwork practice.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/cbb95c9a-c181-4c63-b4cd-87444c0ec2ec" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ MDC602 ═══════ -->
+  <section class="module m-mdc">
+    <div class="module-head">
+      <div class="module-code-ghost">MDC602</div>
+      <div class="module-label">MDC602 · MDC401</div>
+      <h2 class="module-title">Surveillance and Digital Media</h2>
+      <p class="module-note">Where the argument became the mechanic: visibility that decays, participation recorded on chain.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="interactive app">
+        <div class="card-tag">#Interactive #DeployedApp</div>
+        <div class="card-title"><a href="https://unvisibility.netlify.app" target="_blank" rel="noopener">Unvisibility Surveillance Wall</a></div>
+        <div class="card-desc">Supabase-backed shared wall where student submissions degrade as others arrive, the blind spot experienced from inside.</div>
+        <div class="card-links"><a href="https://unvisibility.netlify.app" target="_blank" rel="noopener">Live</a></div>
+      </div>
+
+      <div class="card" data-type="activity">
+        <div class="card-tag">#Activity #XR</div>
+        <div class="card-title"><a href="https://claude.ai/chat/acb11e5e-dcf6-469f-b2fa-67374f1d90d8" target="_blank" rel="noopener">XR Visibility and Erasure Activity</a></div>
+        <div class="card-desc">Three artifacts per student, an XR render, a 150-word Visibility Statement, and a POAP minted for every participant.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/acb11e5e-dcf6-469f-b2fa-67374f1d90d8" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ PER702 ═══════ -->
+  <section class="module m-per702">
+    <div class="module-head">
+      <div class="module-code-ghost">PER702</div>
+      <div class="module-label">PER702</div>
+      <h2 class="module-title">Professional Perspectives: Global Media and Communications</h2>
+      <p class="module-note">From the first day icebreaker to the Banksy visit, the marking rubric to the peer feedback system: the most fully documented module in the collection.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive #Blackboard</div>
+        <div class="card-title">Student Journey Map (original)</div>
+        <div class="card-desc">12-week module overview for Blackboard with MLO badges, guest speakers and portfolio deliverables as a visual HTML timeline.</div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive #Blackboard</div>
+        <div class="card-title">Student Journey Map with Dates</div>
+        <div class="card-desc">Rebuilt with weekly dates from Jan 26 to Apr 27, Easter break marked, sitting cleanly above each week marker.</div>
+      </div>
+
+      <div class="card" data-type="interactive">
+        <div class="card-tag">#Interactive #Blackboard</div>
+        <div class="card-title">Student Journey Map v01</div>
+        <div class="card-desc">Enhanced version adding extended professional practice rationale, About This Module and Evidence of Professional Practice banners, and indicative portfolio labels.</div>
+      </div>
+
+      <div class="card" data-type="agenda">
+        <div class="card-tag">#Agenda #Iterations</div>
+        <div class="card-title">Week 1 Agenda, Three Drafts</div>
+        <div class="card-desc">150-minute Introduction to Professional Practice session iterated from icebreaker and skills mapping through a Padlet-based professional presence audit across three rounds.</div>
+      </div>
+
+      <div class="card" data-type="document activity">
+        <div class="card-tag">#Document #TripBrief</div>
+        <div class="card-title">Banksy Trip Brief</div>
+        <div class="card-desc">Logistics, Regent's travel directions, exhibition overview, Padlet questions, student activities table, MLO alignment and assessment connections for the Banksy Limitless visit.</div>
+      </div>
+
+      <div class="card" data-type="document activity">
+        <div class="card-tag">#Document #TripBrief</div>
+        <div class="card-title">Banksy Comprehensive Document</div>
+        <div class="card-desc">All-in-one expansion adding a full Who Is Banksy? section, six professional relevance themes (virality, anonymity branding, IP, global flows) and the full pedagogical argument for attendance.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #ReadingList</div>
+        <div class="card-title">Banksy Academic Reading List</div>
+        <div class="card-desc">Five thematic areas from IP and legal battles to the Banksy Effect, with critical discussion prompts built into each section.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Visual</div>
+        <div class="card-title">Banksy One-Pager</div>
+        <div class="card-desc">Single high-impact page making the case for the exhibition visit concisely, designed to convince students to attend.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Marking</div>
+        <div class="card-title">Assessment Brief PER702 GMC 2026</div>
+        <div class="card-desc">Full e-portfolio marking rubric across four criteria, Professional Communication, Reflective Evaluation, Evidence of Professional Practice, Work as a Whole, updated with AI and Metaverse additions.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Profile</div>
+        <div class="card-title">Àngels Professional Profile v1 and v2</div>
+        <div class="card-desc">Two-column student-facing instructor profile in A4 layout, v2 adding e-portfolio link, expanded training path tags and fuller Academic Skills section.</div>
+      </div>
+
+      <div class="card" data-type="interactive app">
+        <div class="card-tag">#Interactive #App</div>
+        <div class="card-title"><a href="https://claude.ai/chat/b4d212fe-d88d-475e-990f-63fc09adefc6" target="_blank" rel="noopener">Firebase Peer Feedback System</a></div>
+        <div class="card-desc">Three apps, QR intake, anonymised results and AI summaries, turning the portfolio walk-around into honest structured feedback.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/b4d212fe-d88d-475e-990f-63fc09adefc6" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Poster #Series</div>
+        <div class="card-title">Guest Speaker Poster Series</div>
+        <div class="card-desc">Galina Skvortsov, Claus Larsen and Poonam Bharkhada in a consistent dark editorial design system.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Marking</div>
+        <div class="card-title"><a href="https://claude.ai/chat/5dc15d46-ac55-4150-adfe-957ac48d2b6d" target="_blank" rel="noopener">E-Portfolio Mark Sheet, Eight Students</a></div>
+        <div class="card-desc">Full extraction, qualitative criterion assessment and per-student feedback in your voice, one page each, Century Gothic.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/5dc15d46-ac55-4150-adfe-957ac48d2b6d" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #ReadingList</div>
+        <div class="card-title"><a href="https://claude.ai/chat/8cfe90a0-93f9-40b3-a9cd-40b6df88a2e7" target="_blank" rel="noopener">Metaverse Reading List and Themes</a></div>
+        <div class="card-desc">Nine verified sources with Harvard references and three thematic paragraphs, intimacy and data, beyond platform capitalism, new identities.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/8cfe90a0-93f9-40b3-a9cd-40b6df88a2e7" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="activity">
+        <div class="card-tag">#Activity #NFT</div>
+        <div class="card-title">Worlds Mediated NFT Collection Activity</div>
+        <div class="card-desc">Student media work framed as a curated collection, linking the showcase platform to professional portfolio practice.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ STUDENT SUPPORT ═══════ -->
+  <section class="module m-support">
+    <div class="module-head">
+      <div class="module-code-ghost">SUPPORT</div>
+      <div class="module-label">Differentiated Support</div>
+      <h2 class="module-title">Dissertation and Student Toolkits</h2>
+      <p class="module-note">Built for one student at a time, where standard formats had already failed them.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Card</div>
+        <div class="card-title"><a href="https://claude.ai/chat/92d041e7-11ea-4da4-96b8-b3a4038b4e2b" target="_blank" rel="noopener">Literature Review Take-Away Card</a></div>
+        <div class="card-desc">Single visual page explaining what a literature review is and the Point-Proof-Link paragraph formula.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/92d041e7-11ea-4da4-96b8-b3a4038b4e2b" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="deck">
+        <div class="card-tag">#Deck #Scaffold</div>
+        <div class="card-title"><a href="https://claude.ai/chat/92d041e7-11ea-4da4-96b8-b3a4038b4e2b" target="_blank" rel="noopener">Scaffolded Literature Review Deck</a></div>
+        <div class="card-desc">One paragraph per slide, what to discuss, which authors, and a worked grey-box example, grouped under real section headings.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/92d041e7-11ea-4da4-96b8-b3a4038b4e2b" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Canvas</div>
+        <div class="card-title"><a href="https://claude.ai/chat/92d041e7-11ea-4da4-96b8-b3a4038b4e2b" target="_blank" rel="noopener">Word Writing Canvas, 3000 Words</a></div>
+        <div class="card-desc">Clean writing surface with the title pre-filled, seed sentences and sized boxes with word targets per paragraph.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/92d041e7-11ea-4da4-96b8-b3a4038b4e2b" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ AI & PEDAGOGY ═══════ -->
+  <section class="module m-pedagogy">
+    <div class="module-head">
+      <div class="module-code-ghost">PEDAGOGY</div>
+      <div class="module-label">AI Literacy · Staff Development</div>
+      <h2 class="module-title">AI and Pedagogy</h2>
+      <p class="module-note">The year's teaching practice turned outward, into frameworks, workshops and a module for the whole institution.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Scoping</div>
+        <div class="card-title"><a href="https://claude.ai/chat/093c7171-e35c-4878-8ba1-6899400c3369" target="_blank" rel="noopener">AI Literacy Module Scoping Document</a></div>
+        <div class="card-desc">Two-part Word document mapping UNESCO, QAA, OU and WEF frameworks into seven learning outcomes and an AI-resilient assessment.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/093c7171-e35c-4878-8ba1-6899400c3369" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Transcripts</div>
+        <div class="card-title"><a href="https://claude.ai/chat/228801ce-99f2-4d02-b584-57cea1aeb45b" target="_blank" rel="noopener">AI for Teaching and Learning Talk, Verbatim</a></div>
+        <div class="card-desc">Live presentation captured across three verbatim transcript files, autonomy, conversational engagement, accessibility.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/228801ce-99f2-4d02-b584-57cea1aeb45b" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Workshop</div>
+        <div class="card-title"><a href="https://claude.ai/chat/51fb07f0-e795-46cf-a655-c7a446989adf" target="_blank" rel="noopener">GenAI Workshop Proposal</a></div>
+        <div class="card-desc">Colleague-facing workshop on free generative AI for interactive activities and Blackboard redesign, written in your own voice.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/51fb07f0-e795-46cf-a655-c7a446989adf" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ PROGRAMME DEVELOPMENT ═══════ -->
+  <section class="module m-programme">
+    <div class="module-head">
+      <div class="module-code-ghost">MA·DEV</div>
+      <div class="module-label">Programme Development</div>
+      <h2 class="module-title">Curriculum and Portfolio Growth</h2>
+      <p class="module-note">From module sessions to whole programmes: market analysis, benchmarking and recruitment.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #BusinessCase</div>
+        <div class="card-title"><a href="https://claude.ai/chat/cacb6b1f-47a2-4632-bbf7-8888308af62d" target="_blank" rel="noopener">MA in AI and Digital Media Production, Business Case</a></div>
+        <div class="card-desc">Market analysis and formal investment case, positioned against Cardiff with a medium-agnostic production curriculum rationale.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/cacb6b1f-47a2-4632-bbf7-8888308af62d" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Benchmarking</div>
+        <div class="card-title"><a href="https://claude.ai/chat/b121ed31-5b8f-4ad3-9a55-0d42e29e865e" target="_blank" rel="noopener">MA Global Media Benchmarking</a></div>
+        <div class="card-desc">Module titles across six comparator institutions, mapped against student search behaviour and naming patterns.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/b121ed31-5b8f-4ad3-9a55-0d42e29e865e" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Recruitment</div>
+        <div class="card-title"><a href="https://claude.ai/chat/8fc1a50f-099d-412e-8059-aa7cc7257152" target="_blank" rel="noopener">Course Recruitment Blurbs, Three Modules</a></div>
+        <div class="card-desc">What will they learn, how, and how assessed, written for prospective students across social media, emerging tech and blockchain.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/8fc1a50f-099d-412e-8059-aa7cc7257152" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #ModuleDesign</div>
+        <div class="card-title"><a href="https://claude.ai/chat/575257c7-3bf2-43f5-bf48-c6c1c4b3358d" target="_blank" rel="noopener">Cybersecurity Risk Management Module Design</a></div>
+        <div class="card-desc">Full postgraduate module descriptor: MLO selection and rationale, teaching approach, learning hours breakdown and assessment component design.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/575257c7-3bf2-43f5-bf48-c6c1c4b3358d" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Research</div>
+        <div class="card-title">Money and Bitcoin: Article Summaries and Citations</div>
+        <div class="card-desc">Two-line summaries of eight articles on money and Bitcoin, four slide outlines, and a full Harvard reference list, drawn from nine PDFs in the project knowledge base.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ INCLUSION ═══════ -->
+  <section class="module m-inclusion">
+    <div class="module-head">
+      <div class="module-code-ghost">ALLY</div>
+      <div class="module-label">Inclusion · Pride 2026</div>
+      <h2 class="module-title">LGBTQ+ Allyship Learning App</h2>
+      <p class="module-note">A deployable three-page site built for Regent's Pride 2026, from scenario quiz to curated resources and a printable personal recap.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="interactive app">
+        <div class="card-tag">#Interactive #DeployedApp</div>
+        <div class="card-title"><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Allyship Quiz (index.html)</a></div>
+        <div class="card-desc">Eight scenario-based allyship reflection questions in vanilla JS, the site landing page, brand-coloured and dependency-free.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive app">
+        <div class="card-tag">#Interactive #DeployedApp</div>
+        <div class="card-title"><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Allyship Resources Page (resources.html)</a></div>
+        <div class="card-desc">Curated resources with sticky nav across intersectional sections, books, films and anthems, with a hearts footer.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="interactive app">
+        <div class="card-tag">#Interactive #DeployedApp</div>
+        <div class="card-title"><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Personal Recap Page (recap.html)</a></div>
+        <div class="card-desc">Printable summary of a user's quiz answers, populated via sessionStorage, so each person gets their own reflection sheet.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Copy</div>
+        <div class="card-title"><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Intranet Staff Comms Paragraph</a></div>
+        <div class="card-desc">Launch paragraph for the Regent's intranet, drafted and revised back to your own voice for the Ally Network announcement.</div>
+        <div class="card-links"><a href="https://claude.ai/chat/fd9c2dfe-5206-448c-bcd8-e392a70ec610" target="_blank" rel="noopener">Chat</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ PLATFORM ═══════ -->
+  <section class="module m-platform">
+    <div class="module-head">
+      <div class="module-code-ghost">WM</div>
+      <div class="module-label">Platform · Worlds Mediated Project</div>
+      <h2 class="module-title">Worlds Mediated</h2>
+      <p class="module-note">The live student media showcase, its deployment scaffold, its submission pipeline, and the LLM architecture documents that govern how it gets designed.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card" data-type="app">
+        <div class="card-tag">#DeployedApp #React #Living</div>
+        <div class="card-title"><a href="https://worlds-mediated.vercel.app" target="_blank" rel="noopener">App.jsx — Live Site Codebase</a></div>
+        <div class="card-desc">The main React file, iterated across every session, currently powering worlds-mediated.vercel.app with collaborator profiles, Publications, NFTs and Social Media components.</div>
+        <div class="card-links"><a href="https://worlds-mediated.vercel.app" target="_blank" rel="noopener">Live</a></div>
+      </div>
+
+      <div class="card" data-type="app">
+        <div class="card-tag">#DeployedApp #React</div>
+        <div class="card-title">worlds-mediated-v2.zip</div>
+        <div class="card-desc">Full Vite/React project scaffold, src, public, package.json, vite.config and index.html, the bundle used for the initial Vercel deployment.</div>
+      </div>
+
+      <div class="card" data-type="app">
+        <div class="card-tag">#React #Prototype</div>
+        <div class="card-title">WorldsMediated.jsx</div>
+        <div class="card-desc">Renderable in-browser prototype with embedded SVG Regent's rose, used for design review before committing to the live build.</div>
+      </div>
+
+      <div class="card" data-type="app">
+        <div class="card-tag">#React #Update</div>
+        <div class="card-title">App.jsx — Feza, Publications and NFTs Update</div>
+        <div class="card-desc">Major session adding Feza's real profile, the Publications section drawing on ARDAC, the NFTs section and the Social Media component.</div>
+      </div>
+
+      <div class="card" data-type="app">
+        <div class="card-tag">#React #Update</div>
+        <div class="card-title">App.jsx — Collaborator Profiles Update</div>
+        <div class="card-desc">Full update for Julia, Isaac, Ludovica, Nezha, Ksenia and Kristi with customSections, TikTok embeds, SoundCloud, YouTube, video and portfolio panels.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Code #Backend</div>
+        <div class="card-title">Google Apps Script v2</div>
+        <div class="card-desc">Form submissions to Google Sheet with email notification, corrected MailApp authorisation, ready to deploy from a personal device.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Architecture</div>
+        <div class="card-title">Designer LLM Architecture V1</div>
+        <div class="card-desc">First full prompt architecture: six layers, master activation prompt, visual prompt generator, React system designer and multi-LLM iteration protocol.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Architecture</div>
+        <div class="card-title">Designer LLM Architecture V4</div>
+        <div class="card-desc">Integrated final architecture combining Claude V1 depth with GPT scaffolding, adding a Design Lineage Database, Visual Canon Matrix and Client Intake Mode.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Readme</div>
+        <div class="card-title">README.md</div>
+        <div class="card-desc">Project documentation capturing the design system, vocabulary, stack and spirit of Worlds Mediated, written to carry across chat sessions.</div>
+      </div>
+
+      <div class="card" data-type="document">
+        <div class="card-tag">#Document #Essay</div>
+        <div class="card-title">C-3PO / R2-D2 Essay, In Progress</div>
+        <div class="card-desc">Conversational versus agentic AI through Star Wars archetypes, in development for publication on Worlds Mediated.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTNOTE -->
+  <footer class="footnote">
+    <p><strong>A note on completeness.</strong> This inventory is compiled from conversations outside Claude Projects, plus project work known from shared history (the deployed apps, the poster series, the NFT deck rebuild, the Week 8 session pack). Conversations held inside projects are not searchable from outside them, so anything built there and never mentioned elsewhere will be missing. Some entries without chat links live in project conversations or pre-date reliable linking. Updated 10 June 2026 with project inventories.</p>
+  </footer>
+
+</div>
+
+<script>
+  // Count artifacts
+  const cards = document.querySelectorAll('.card');
+  document.getElementById('stat-count').textContent = cards.length;
+
+  // Type filtering
+  const buttons = document.querySelectorAll('.filter-btn');
+  const modules = document.querySelectorAll('.module');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+
+      cards.forEach(card => {
+        const types = (card.dataset.type || '').split(' ');
+        const show = filter === 'all' || types.includes(filter);
+        card.classList.toggle('hidden', !show);
+      });
+
+      modules.forEach(mod => {
+        const visible = mod.querySelectorAll('.card:not(.hidden)').length;
+        mod.classList.toggle('empty', visible === 0);
+      });
+    });
+  });
+</script>
+</body>
+</html>

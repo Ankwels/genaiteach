@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F5F0;--ink:#16150F;--mid:#6C6A60;--rule:#D8D3C8;
+  --s0:#EFEDE6;--s1:#F5EEF3;--s2:#EEF5F3;--s3:#EEF0F8;--s4:#F5F0E8;--s5:#F0EEF5;
+  --a0:#3A3830;--a1:#7B3872;--a2:#14544A;--a3:#4F3F86;--a4:#8A5A0B;--a5:#4A3F86;
+  --max:960px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;font-weight:300;font-size:16px;line-height:1.6}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+header{padding:56px 0 28px;border-bottom:2px solid var(--ink)}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--mid);margin:0 0 16px}
+h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:500;
+  font-size:clamp(32px,5vw,54px);line-height:1.03;letter-spacing:-.02em;margin:0}
+
+.step{border-bottom:1px solid var(--rule);padding:26px 0}
+.step-head{display:flex;align-items:baseline;gap:14px;margin:0 0 4px}
+.num{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+  color:var(--mid);width:26px;flex:0 0 auto;padding-top:2px}
+.step h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:500;font-size:20px;margin:0}
+.hint{color:var(--mid);font-size:14px;margin:0 0 14px 40px}
+.field{margin-left:40px}
+input[type=text],textarea,select{
+  width:100%;font-family:inherit;font-size:15px;font-weight:300;color:var(--ink);
+  background:#fff;border:1px solid var(--rule);border-radius:3px;padding:11px 13px;line-height:1.5}
+textarea{min-height:88px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--a2);outline-offset:1px;border-color:transparent}
+label.sub{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mid);margin:14px 0 6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:620px){.two{grid-template-columns:1fr}.hint,.field{margin-left:0}.num{width:auto}}
+
+.pillrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.pill{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;
+  background:#fff;border:1px solid var(--rule);border-radius:2px;padding:6px 11px;cursor:pointer;color:var(--mid)}
+.pill:hover{border-color:var(--ink);color:var(--ink)}
+.pill[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+.actions{padding:30px 0 10px;display:flex;gap:10px;flex-wrap:wrap}
+button.go{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.09em;
+  text-transform:uppercase;background:var(--ink);color:var(--paper);border:1px solid var(--ink);
+  padding:12px 22px;border-radius:3px;cursor:pointer}
+button.ghost{background:none;color:var(--mid)}
+button.ghost:hover{color:var(--ink);border-color:var(--ink)}
+
+/* OUTPUT */
+#out{display:none;padding:10px 0 90px}
+#out.on{display:block}
+.plan-head{padding:36px 0 22px;border-bottom:2px solid var(--ink);margin-bottom:0}
+.plan-head h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:500;
+  font-size:clamp(26px,4vw,40px);line-height:1.05;letter-spacing:-.02em;margin:0 0 10px}
+.obj{margin:14px 0 0;padding:0;list-style:none}
+.obj li{position:relative;padding-left:20px;margin-bottom:5px;font-size:15.5px}
+.obj li::before{content:"";position:absolute;left:0;top:10px;width:9px;height:1.5px;background:var(--ink)}
+
+.slot{padding:20px 24px;border-bottom:1px solid rgba(0,0,0,.09);display:grid;
+  grid-template-columns:76px 1fr;gap:0 20px;align-items:start}
+.slot .tm{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--mid);padding-top:4px}
+.slot .lbl{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;margin:0 0 4px}
+.slot .ttl{font-weight:500;font-size:16.5px;line-height:1.3;margin:0 0 4px}
+.slot .nt{font-size:14px;color:var(--mid);margin:0}
+.s0{background:var(--s0)} .s0 .lbl{color:var(--a0)}
+.s1{background:var(--s1)} .s1 .lbl{color:var(--a1)}
+.s2{background:var(--s2)} .s2 .lbl{color:var(--a2)}
+.s3{background:var(--s3)} .s3 .lbl{color:var(--a3)}
+.s4{background:var(--s4)} .s4 .lbl{color:var(--a4)}
+.s5{background:var(--s5)} .s5 .lbl{color:var(--a5)}
+@media(max-width:620px){.slot{grid-template-columns:1fr;gap:4px;padding:16px 18px}}
+
+.qs{margin-top:44px;padding-top:26px;border-top:2px solid var(--ink)}
+.qs h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:500;font-size:22px;margin:0 0 6px}
+.qs p.sub{color:var(--mid);font-size:14.5px;margin:0 0 20px;max-width:62ch}
+.q{border-top:1px solid var(--rule);padding:16px 0}
+.q p{margin:0 0 8px;font-weight:500;font-size:16px}
+.q textarea{min-height:62px}
+.ref{margin:26px 0 0;padding-top:16px;border-top:1px solid var(--rule);
+  font-size:13px;color:var(--mid);max-width:62ch}
+.ref em{font-style:italic}
+.ref{line-height:1.7}
+.ref a{color:var(--a2)}
+.qref{margin:0 0 9px;font-size:13px;color:var(--mid);line-height:1.5}
+.qref a{color:var(--a2)}
+
+@media print{
+  header,.step,.actions,.qs textarea{display:none}
+  #out{display:block!important}
+  body{background:#fff;font-size:10.5pt}
+  .slot{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .q{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <p class="eyebrow">Regent's University London · Interactive Learning</p>
+  <h1>Session builder</h1>
+</div></header>
+
+<div class="wrap" id="form">
+
+  <div class="step">
+    <div class="step-head"><span class="num">Topic</span><h2>What is this session about?</h2></div>
+    <p class="hint">One line. The thing itself, not the module code.</p>
+    <div class="field"><input type="text" id="topic" placeholder="Surveillance and the self"></div>
+  </div>
+
+  <div class="step">
+    <div class="step-head"><span class="num">0</span><h2>Objectives</h2></div>
+    <p class="hint">Finish the sentence. One per line, three is usually enough.</p>
+    <div class="field">
+      <p style="margin:0 0 8px;font-size:15px">By the end of this session you will be able to&hellip;</p>
+      <textarea id="objs" placeholder="explain how visibility is produced, not given&#10;identify three surveillance mechanisms in your own daily use&#10;argue a position on consent in public space"></textarea>
+      <label class="sub">Link to MLOs, optional</label>
+      <input type="text" id="mlos" placeholder="MLO2, MLO4">
+      <div class="two" style="margin-top:14px">
+        <div><label class="sub">Session length</label>
+          <select id="len"><option>60 minutes</option><option selected>90 minutes</option><option>120 minutes</option><option>180 minutes</option></select></div>
+        <div><label class="sub">Room</label>
+          <select id="room"><option selected>Seminar room</option><option>Lecture theatre</option><option>Computer room</option><option>Online</option></select></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head"><span class="num">1</span><h2>Icebreaker</h2></div>
+    <p class="hint">Five to ten minutes. Gets people talking before you do.</p>
+    <div class="field"><select id="ice"></select><div class="pillrow" id="icePills"></div></div>
+  </div>
+
+  <div class="step">
+    <div class="step-head"><span class="num">2</span><h2>RADAR activity</h2></div>
+    <p class="hint">The centre of the session. Pick a band, then an activity.</p>
+    <div class="field">
+      <div class="pillrow" id="bandPills"></div>
+      <select id="act" style="margin-top:10px"></select>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head"><span class="num">3</span><h2>Micro-lecture</h2></div>
+    <p class="hint">Ten to fifteen minutes of you. Name the three things it must land.</p>
+    <div class="field"><textarea id="lect" placeholder="the difference between being seen and being watched&#10;Foucault's asymmetry, briefly&#10;why platform visibility is not the same as public space"></textarea></div>
+  </div>
+
+  <div class="step">
+    <div class="step-head"><span class="num">4</span><h2>Recap</h2></div>
+    <p class="hint">Suggested for you. Change it if you want something else.</p>
+    <div class="field"><select id="recap"></select></div>
+  </div>
+
+  <div class="step">
+    <div class="step-head"><span class="num">5</span><h2>Asynchronous activity</h2></div>
+    <p class="hint">What happens between this session and the next.</p>
+    <div class="field"><select id="async"></select></div>
+  </div>
+
+  <div class="actions">
+    <button class="go" id="build">Build the session</button>
+    <button class="go ghost" id="reset">Clear</button>
+  </div>
+</div>
+
+<div class="wrap" id="out">
+  <div class="plan-head">
+    <h2 id="oTopic"></h2>
+    <p id="oMeta" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:var(--mid);margin:0"></p>
+    <p style="margin:18px 0 0;font-size:15px">By the end of this session you will be able to&hellip;</p>
+    <ul class="obj" id="oObjs"></ul>
+  </div>
+  <div id="oSlots"></div>
+
+  <div class="qs">
+    <h3>Before you run it</h3>
+    <p class="sub">Answer these for yourself before the session runs.</p>
+    <div class="q"><p>Will this work?</p><textarea></textarea></div>
+    <div class="q"><p>Is it too long or too short?</p><textarea></textarea></div>
+    <div class="q"><p>How is this making learning happen?</p><textarea></textarea></div>
+    <div class="q"><p>Will this be inclusive? Who in the room finds this hard, and what have you done about it?</p>
+      <p class="qref"><a href="https://www.advance-he.ac.uk/teaching-and-learning/psf" target="_blank" rel="noopener">Professional Standards Framework 2023, Advance HE</a>. Inclusion runs through the Professional Values, V1 to V5.</p>
+      <textarea></textarea></div>
+    <div class="q"><p>Whose eyes have you looked at this through? Your own, your students', your colleagues', the literature?</p>
+      <p class="qref"><a href="https://www.wiley.com/en-us/Becoming+a+Critically+Reflective+Teacher%2C+2nd+Edition-p-9781119049708" target="_blank" rel="noopener">Brookfield's four lenses of critical reflection</a>.</p>
+      <textarea></textarea></div>
+    <div class="q"><p>What tools do students need? Do they all have them?</p><textarea></textarea></div>
+    <div class="q"><p>Can AI create those tools, and have you left time to make them?</p><textarea></textarea></div>
+
+    <p class="ref">Advance HE (2023) <a href="https://www.advance-he.ac.uk/teaching-and-learning/psf" target="_blank" rel="noopener"><em>Professional Standards Framework for teaching and supporting learning in higher education.</em></a> York: Advance HE.<br>
+      Brookfield, S. D. (2017) <em>Becoming a Critically Reflective Teacher.</em> 2nd edn. San Francisco: Jossey-Bass.<br>
+      Race, P. (2014) <em>Making Learning Happen: A Guide for Post-Compulsory Education.</em> 3rd edn. London: Sage.</p>
+  </div>
+
+  <div class="actions"><button class="go" onclick="window.print()">Print or save as PDF</button>
+  <button class="go ghost" id="back">Back to edit</button></div>
+</div>
+
+<script>
+const BANDS={"Research": ["Research using online sources", "Arguing for or against AI generated answers", "Critical comparison of sources", "Annotating", "Collaborative reading and note taking", "Creating mindmaps", "Creating a blog or vlog of research", "Fact verification hunt", "Real or myth", "First five steps into a community", "Paired participant observation", "Field trip observation brief", "Case study research task", "Building a referenced reading list", "Comparing AI outputs", "Challenge AI to a task you already did", "Article reading app", "Soundwalk and sonic ethnography", "Build a survey and collect from the room", "Turn a Padlet into a dataset", "Build a coding frame in Excel", "Design a research instrument"], "Acquire": ["Creating an infographic", "Discovery games", "Interactive video", "Just a minute", "Analytic teams", "In your own words", "Jigsaw method", "Navigable micro-lecture", "Card sorting into two categories", "Hands on technical demo", "Campus scavenger hunt", "Gamified knowledge quest", "Accordion reveal quiz", "Complete the findings", "Decision tree comparison", "Pechakucha", "Watching a concert in the metaverse", "Playing games in the metaverse", "Read a spreadsheet you did not make", "Chart the same data three ways", "Timeline build"], "Discuss": ["Peer assessed assignments", "Gallery walk", "Asynchronous discussions", "Fishbowl discussion", "Think pair share", "Structured debate", "Live voting on group proposals", "Anonymised peer feedback", "Identity mapping wall", "Question channel to the tutor", "AI assisted group formation", "Avatar creation and analysis", "Negotiate with an AI stakeholder", "Moodboard critique", "Live data on the room", "Human bar chart", "Devil's advocate rotation"], "Action": ["Post-it parade", "Digital story", "Model UN style roleplay", "Roleplay an expert", "Divergent thinking", "Invent a quiz", "Revision quiz", "Historical decision simulation", "Write a pledge in WHEN THEN logic", "Build a blockchain from scratch", "Mint a participation token", "Deploy a shared class wall", "Remix challenge", "Poster builder from a formula", "Podcast production", "Curate a student exhibition", "XR render as an artifact", "Game co-creation design", "Creating simple 3D virtual environments", "Working in the metaverse", "Creating a bot", "Figma course project", "Canva poster challenge", "AI project iteration board", "Sixty second sound essay", "Score a silent clip", "Video essay", "Sonify a dataset", "Build a data collection tool for fieldwork", "Make a calculator or model", "Build a dashboard from your own data", "Speed dating introductions", "Two truths and a discipline lie", "Matching pairs", "True or false column drag", "Create a newspaper", "Poll the room, students write the poll", "Pitch to a panel", "Casting and campaign brief", "Style a brief against a constraint", "Escape room", "Consultancy roleplay", "Build a bot in the session", "Run a quiz to collect research data"], "Reflect": ["Reflective goal-setting blogs", "Muddiest point", "Create an A3 poster", "3-2-1 survey", "In your own lives", "Feedback loops", "Reading app with AI dialogue", "Self audit checklist", "150 word position statement", "Student journey map", "What changed after the compare", "Creating a reflexive diary", "Prompt trail annotation", "Audio reflection", "Track your own data across the module", "Exit ticket wall"]};
+const ICE=["Speed dating introductions", "Two truths and a discipline lie", "Human bar chart", "Post-it parade", "Just a minute", "Matching pairs", "True or false column drag", "Think pair share", "Muddiest point", "Divergent thinking"];
+const RECAP=["Muddiest point", "3-2-1 survey", "Exit ticket wall", "In your own words", "Complete the findings", "Accordion reveal quiz", "Matching pairs", "True or false column drag", "Just a minute", "Revision quiz"];
+const ASYNC=["Asynchronous discussions", "Annotating", "Article reading app", "Reading app with AI dialogue", "Navigable micro-lecture", "Interactive video", "Creating a blog or vlog of research", "Reflective goal-setting blogs", "Creating a reflexive diary", "Building a referenced reading list", "Research using online sources", "Fact verification hunt", "Case study research task", "Podcast production", "Video essay", "Sixty second sound essay", "Prompt trail annotation", "Track your own data across the module", "Self audit checklist", "150 word position statement", "Feedback loops", "Gamified knowledge quest", "Revision quiz", "Real or myth", "Timeline build"];
+
+const $=id=>document.getElementById(id);
+const fill=(el,arr)=>{el.innerHTML=arr.map(v=>`<option>${v}</option>`).join("");};
+fill($("ice"),ICE); fill($("recap"),RECAP); fill($("async"),ASYNC);
+
+// band pills
+let band=Object.keys(BANDS)[0];
+$("bandPills").innerHTML=Object.keys(BANDS).map(b=>
+  `<button class="pill" data-b="${b}" aria-pressed="${b===band}">${b}</button>`).join("");
+fill($("act"),BANDS[band]);
+$("bandPills").addEventListener("click",e=>{
+  const b=e.target.dataset.b; if(!b) return;
+  band=b;
+  [...$("bandPills").children].forEach(p=>p.setAttribute("aria-pressed",p.dataset.b===b));
+  fill($("act"),BANDS[b]);
+});
+
+// icebreaker shortcuts
+$("icePills").innerHTML=ICE.slice(0,4).map(v=>`<button class="pill" data-v="${v}">${v}</button>`).join("");
+$("icePills").addEventListener("click",e=>{if(e.target.dataset.v)$("ice").value=e.target.dataset.v;});
+
+// timing model
+function times(total){
+  const t=parseInt(total);
+  if(t<=60)  return [5,18,12,8,0];
+  if(t<=90)  return [8,30,15,12,0];
+  if(t<=120) return [10,45,15,15,0];
+  return [12,75,20,20,0];
+}
+let cur=0;
+const clock=m=>{const s=`${m} min`; return s;};
+
+$("build").addEventListener("click",()=>{
+  const topic=$("topic").value.trim()||"Untitled session";
+  const objs=$("objs").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  const lect=$("lect").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  const [tIce,tAct,tLec,tRec]=times($("len").value);
+
+  $("oTopic").textContent=topic;
+  const mlo=$("mlos").value.trim();
+  $("oMeta").textContent=[$("len").value,$("room").value,mlo?("Linked to "+mlo):""].filter(Boolean).join("  ·  ");
+  $("oObjs").innerHTML=objs.length?objs.map(o=>`<li>${o}</li>`).join(""):"<li>Not yet written</li>";
+
+  const slots=[
+    ["s0","Agenda","Objectives on screen","Read the three objectives aloud. Students write down which one they already think they can do.","2 min"],
+    ["s1","Icebreaker",$("ice").value,"Nobody has spoken yet. This is where they start.",clock(tIce)],
+    ["s2","RADAR · "+band,$("act").value,"The centre of the session. Students do the work, you circulate.",clock(tAct)],
+    ["s3","Micro-lecture",lect.length?lect[0]:"Ten to fifteen minutes of input",
+      lect.length>1?("Also: "+lect.slice(1).join("; ")):"Comes after the activity, so it answers questions they now have.",clock(tLec)],
+    ["s4","Recap",$("recap").value,"They tell you what landed, not the other way round.",clock(tRec)],
+    ["s5","Asynchronous",$("async").value,"Between this session and the next. Set it before they leave the room.","Between sessions"]
+  ];
+  $("oSlots").innerHTML=slots.map(([c,l,t,n,tm])=>
+    `<div class="slot ${c}"><div class="tm">${tm}</div><div>
+      <p class="lbl">${l}</p><p class="ttl">${t}</p><p class="nt">${n}</p></div></div>`).join("");
+
+  $("form").style.display="none";
+  $("out").classList.add("on");
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+$("back").addEventListener("click",()=>{
+  $("out").classList.remove("on"); $("form").style.display="";
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+$("reset").addEventListener("click",()=>{
+  ["topic","objs","mlos","lect"].forEach(i=>$(i).value="");
+});
+</script>
+</body>
+</html>
