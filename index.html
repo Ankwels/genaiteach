@@ -43,6 +43,7 @@ h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:500;
   margin:26px 0 30px;max-width:20ch}
 .lead.wide{max-width:26ch}
 .emph{font-weight:700}
+.voice{font-style:italic;color:var(--acc);font-weight:300}
 .hr{width:64px;height:2px;background:var(--acc);margin:0 0 28px}
 p{margin:0 0 18px;max-width:68ch}
 .body p{font-size:17px}
@@ -217,6 +218,30 @@ ol.steps li{margin-bottom:9px;font-size:15.5px;line-height:1.55}
 .split-media img{width:100%;display:block;border-radius:4px;border:1px solid var(--rule);box-shadow:0 1px 0 rgba(22,21,15,.04)}
 .qrrow .qtext{flex:1 1 380px;min-width:280px}
 
+/* ---------------- recap picker ---------------- */
+.wrapgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 8px;max-width:920px}
+@media(max-width:820px){.wrapgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.wrapgrid{grid-template-columns:1fr}}
+.wrapcard{background:var(--white);border:1px solid var(--rule);border-radius:4px;
+  padding:20px 20px 22px;text-align:left;cursor:pointer;font:inherit;color:inherit;
+  display:flex;flex-direction:column;gap:11px;
+  transition:border-color .18s,transform .18s,box-shadow .18s,background .18s,color .18s}
+.wrapcard:hover{border-color:var(--acc);transform:translateY(-2px);box-shadow:0 6px 18px rgba(22,21,15,.07)}
+.wrapcard .wc-k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--acc);opacity:.85}
+.wrapcard .wc-n{font-family:"Bricolage Grotesque",sans-serif;font-weight:500;
+  font-size:17px;line-height:1.28;letter-spacing:-.01em}
+.wrapcard.active{border-color:var(--acc);border-width:2px;background:var(--acc);
+  color:var(--white);padding:19px 19px 21px}
+.wrapcard.active .wc-k{color:var(--white)}
+
+.wrapanswer{margin-top:8px;max-width:70ch}
+.wrapanswer.show{animation:rise .4s cubic-bezier(.2,.7,.3,1)}
+.wrapanswer .wa-q{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mid);margin:0 0 12px}
+.wrapanswer .wa-a{font-family:"Bricolage Grotesque",sans-serif;font-weight:500;
+  font-size:clamp(19px,2.5vw,25px);line-height:1.4;letter-spacing:-.01em;
+  border-left:3px solid var(--acc);padding:2px 0 2px 22px}
 /* ---------------- chrome ---------------- */
 .bar{position:fixed;left:0;right:0;bottom:0;height:58px;background:var(--paper);
   border-top:1px solid var(--rule);display:flex;align-items:center;
@@ -246,6 +271,7 @@ button:focus-visible,.dot:focus-visible,a:focus-visible{outline:2px solid var(--
   .act{padding:20px 18px}
   .count{display:none}
   .qrrow{gap:22px}
+  .split-row{gap:22px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -284,7 +310,6 @@ button:focus-visible,.dot:focus-visible,a:focus-visible{outline:2px solid var(--
     </div>
    </div>
   </div>
-  <p class="lead wide">Giving learners and educators more control and autonomy.</p>
   <div class="body cols">
    <p>Interactivity is often discussed as something that happens inside a classroom activity, but it can also happen in how we distribute materials, how we share resources, and how much control we give learners over the learning experience itself. Me giving you this app is our first interactive activity today.</p>
    <p>The presentation is no longer something I control, something you have to wait for it until the end of the session, or until I deliver it, or in Blackboard, where I control the speed of the delivery and all of its content, and you receive it as an audience.</p>
@@ -336,10 +361,11 @@ button:focus-visible,.dot:focus-visible,a:focus-visible{outline:2px solid var(--
   <p class="lead">The key point I want to make is that AI is not a software.</p>
   <div class="body cols">
    <p>The real difference with using GenAI is not that it saves time either (will explore this later). My argument here is that with AI what changes is that you become, for the first time, autonomus of all the previous softwares, word, excel, powerpoint, the microsoft word, the world of obscure code writing and the expensive individual license solutions for interactive cd-roms.</p>
-   <p>With AI you can design something for you that is better designed because it responds to your needs and the problems you want tor resolve with them. It is an expensive autonomy.</p>
+   <p>With AI you can design something for you that is better designed because it responds to your needs and the problems you want to resolve with them. It is an expensive autonomy, though.</p>
+   <p>However, here is the difference: fighting Word&rsquo;s rigidity produces nothing transferable, you don&rsquo;t walk away from formatting a Word document with a new capability. But catching a hallucination, checking it, correcting it, that is a capability. With AI we are supervising, and supervision is a skill, submission to a software isn&rsquo;t.</p>
    <p>However, with Gen Ai many of us can create the things we previously needed software permissions, specialist platforms, subscriptions or technical expertise to build: a simulation, a game, an interactive reading, a research application, a scavenger hunt, an interactive visualisation&hellip; we talk to GenAI about what we need, delegate the obscurity of coding and other dependencies to it, and produce new solutions for learning.</p>
-   <p>When I talk about GenAI interactive teaching I am talking of an interactive cognitive partner, a tool, thinking partner, learning companion, scaffold for learning. Rather than simply delivering content, GenAI participates in the learning process and can be used to create activities that augments the learning process.</p>
-   <p>GenAI is not just digitalizing existing educational practices, but reshaping the learning environment itself. The work we&rsquo;ll try today is an adventure into being curious and reimagining our learning environment.</p>
+   <p class="voice">When I talk about GenAI interactive teaching I am talking of an interactive cognitive partner, a tool, thinking partner, learning companion, scaffold for learning. Rather than simply delivering content, GenAI participates in the learning process and can be used to create activities that augments the learning process.</p>
+   <p class="voice">GenAI is not just digitalizing existing educational practices, but reshaping the learning environment itself. The work we&rsquo;ll try today is an adventure into being curious and reimagining our learning environment.</p>
   </div>
  </div>
 </section>
@@ -495,7 +521,7 @@ No login, no database, no sign up.</div>
   <p class="myth">There is a perfect prompt for every task</p>
   <div><button class="btn tap">Reveal</button></div>
   <div class="reveal">
-   <p>Prompting is often heralded as the key to succesful use of AI, however there is a bit of a misconception around this and prompting is treated as a kind of specialised knowledge. At worst, it is presented as a magic formula of sorts. People often search for the perfect prompt, but there is not one.</p>
+   <p>Prompting is often heralded as the key to successful use of AI, however there is a bit of a misconception around this and prompting is treated as a kind of specialised knowledge. At worst, it is presented as a magic formula of sorts. People often search for the perfect prompt, but there is not one.</p>
    <div class="body cols">
     <p>Prompting does not make AI more intelligent. It helps GenAi use its existing capabilities more effectively.</p>
     <p>The thing to remember about prompting is that: Prompting is iterative. Prompting is contextual. Prompting depends on goals. The most useful prompts are rarely the cleverest, they are usually the clearest.</p>
@@ -607,15 +633,15 @@ I may do this in Padlet unless there is an artifact you could create where there
   <div class="acc">
    <button class="acc-h" type="button">Teaching has always relied on technologies</button>
    <div class="acc-b">
-    <p>To bring pedagogy into the classroom we already rely on a great many technologies and frameworks: PowerPoint, Blackboard, Polling systems, quiz platforms, discussion boards, RADAR, images, maps, videsos, diagrams and simulations.</p>
+    <p>To bring pedagogy into the classroom we already rely on a great many technologies and frameworks: PowerPoint, Blackboard, Polling systems, quiz platforms, discussion boards, RADAR, images, maps, videos, diagrams and simulations.</p>
     <p>Digital teaching technologies help us enable perspectives. Think of any past or present technology, the projecting acetate, the poll, a visual cloud a metaverse room. They allow us to zoom in and out, to consider different angles, to rotate an object, to explore unseen places, compare viewpoints, visualise abstract concepts, to let the mind wonder aimlessly, sometimes to get lost, to make curiosity a habit.</p>
     <p class="lead wide">The question is not whether we use teaching technologies. The question is what kind of digital technology and teaching space we are developing when we use GenAI?</p>
-    <p>Technology has always been part of teaching. In a teaching and learning context, AI is more than just a digital tool, it can be understood as a socio-technical learning environment that creates interactive, adaptative and conversational learnings spaces. It supports personalised learning, feedback generation, contente creaton, assessment support, knowledge exploration (interactive activities).</p>
+    <p>Technology has always been part of teaching. In a teaching and learning context, AI is more than just a digital tool, it can be understood as a socio-technical learning environment that creates interactive, adaptive and conversational learnings spaces. It supports personalised learning, feedback generation, content creation, assessment support, knowledge exploration (interactive activities).</p>
    </div>
   </div>
   <div class="body cols">
-   <p>We say that Gen AI is a conversational learning environment (unlke Blackboard, Moodle) GenAI creates a dialogic space where learners can ask questions, receive immediate responses, explore ideas iteratively, engage in simulated discussions. It aligns with Vygotsky&rsquo;s social constructivism where learning emerges through interaction and dialogue, so when we talk about &lsquo;interactive&rsquo; we are talking about a digitally mediated learning space that enables learners to inteact with knowledge, scenarios, simulated expertise through natural language, and unlke static webpages, the space is dynamically generated in response to learner acttions.</p>
-   <p>A GenAI interaction is a syntethic learning environment in which educational content, interactions and learning pathways are generated in real time. The learning environment is not pre-built but it emerges, experimentally, through interaction between learner and AI.</p>
+   <p>We say that Gen AI is a conversational learning environment (unlike Blackboard, Moodle) GenAI creates a dialogic space where learners can ask questions, receive immediate responses, explore ideas iteratively, engage in simulated discussions. It aligns with Vygotsky&rsquo;s social constructivism where learning emerges through interaction and dialogue, so when we talk about &lsquo;interactive&rsquo; we are talking about a digitally mediated learning space that enables learners to interact with knowledge, scenarios, simulated expertise through natural language, and unlike static webpages, the space is dynamically generated in response to learner actions.</p>
+   <p>A GenAI interaction is a synthetic learning environment in which educational content, interactions and learning pathways are generated in real time. The learning environment is not pre-built but it emerges, experimentally, through interaction between learner and AI.</p>
   </div>
   <p style="margin-top:18px">
     <a class="btn" href="5-showcase.html" target="_blank" rel="noopener">Three years of working with AI exploring interactive activities (120+)</a>
@@ -654,16 +680,16 @@ I may do this in Padlet unless there is an artifact you could create where there
  <div class="inner">
   <h2>It&rsquo;s a wrap</h2>
   <div class="hr" style="margin-top:22px"></div>
-  <p class="lead wide">Ask Claude to summarise this presentation. Pick an angle, see what comes back.</p>
-  <div class="row" id="wrapButtons" style="margin-top:20px">
-   <button class="btn" type="button" data-wrap="activities">Hands-on activities to try</button>
-   <button class="btn" type="button" data-wrap="concepts">Key concepts</button>
-   <button class="btn" type="button" data-wrap="theory">Theoretical underpinnings</button>
-   <button class="btn" type="button" data-wrap="myths">Myths worth challenging</button>
-   <button class="btn" type="button" data-wrap="monday">Where to start Monday morning</button>
-   <button class="btn" type="button" data-wrap="conclusion">Concluding statement</button>
+  <p class="lead wide">Ask Claude to summarise this presentation.</p>
+  <div class="wrapgrid" id="wrapButtons">
+   <button class="wrapcard" type="button" data-wrap="activities"><span class="wc-k">01</span><span class="wc-n">Hands-on activities to try</span></button>
+   <button class="wrapcard" type="button" data-wrap="concepts"><span class="wc-k">02</span><span class="wc-n">Key concepts</span></button>
+   <button class="wrapcard" type="button" data-wrap="theory"><span class="wc-k">03</span><span class="wc-n">Theoretical underpinnings</span></button>
+   <button class="wrapcard" type="button" data-wrap="myths"><span class="wc-k">04</span><span class="wc-n">Myths worth challenging</span></button>
+   <button class="wrapcard" type="button" data-wrap="monday"><span class="wc-k">05</span><span class="wc-n">Where to start Monday morning</span></button>
+   <button class="wrapcard" type="button" data-wrap="conclusion"><span class="wc-k">06</span><span class="wc-n">Concluding statement</span></button>
   </div>
-  <div id="wrapAnswer" style="margin-top:22px;min-height:40px"></div>
+  <div class="wrapanswer" id="wrapAnswer" style="margin-top:26px;min-height:40px"></div>
  </div>
 </section>
 
@@ -980,13 +1006,18 @@ const WRAP={
  monday:{ask:"What is the single most practical next step from this presentation?",
   answer:"Start with a conversation, not a build. Open a chat with an AI, describe the teaching problem you actually have, and let the activity emerge from that back and forth rather than starting from a template."},
  conclusion:{ask:"Give me the concluding statement of this presentation.",
-  answer:"Interactive teaching was never about the technology. The question is not whether we use these tools, it is what kind of learning space we build when we do, and whether it gives our students, and us, more autonomy than we had before."}
+  answer:"Interactive teaching was never about the technology. The question is not whether we use these tools, it is what kind of learning space we build when we do, and whether it gives our students, and us, more autonomy, in how we think, how we design, and what we can teach and learn, than we had before."}
 };
 document.querySelectorAll('#wrapButtons button').forEach(function(b){
  b.addEventListener('click',function(){
+  document.querySelectorAll('#wrapButtons button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
   const item=WRAP[b.getAttribute('data-wrap')];
   const box=document.getElementById('wrapAnswer');
-  box.innerHTML='<div class="prompt">'+item.ask+'</div><p class="replylab">Claude replied</p><div class="reply">'+item.answer+'</div>';
+  box.classList.remove('show');
+  void box.offsetWidth;
+  box.innerHTML='<p class="wa-q">'+item.ask+'</p><div class="wa-a">'+item.answer+'</div>';
+  box.classList.add('show');
  });
 });
 
