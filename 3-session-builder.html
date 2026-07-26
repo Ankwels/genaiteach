@@ -128,7 +128,7 @@ button.ghost:hover{color:var(--ink);border-color:var(--ink)}
       <input type="text" id="mlos" placeholder="MLO2, MLO4">
       <div class="two" style="margin-top:14px">
         <div><label class="sub">Session length</label>
-          <select id="len"><option>60 minutes</option><option selected>90 minutes</option><option>120 minutes</option><option>180 minutes</option></select></div>
+          <select id="len"><option>20 minutes</option><option>30 minutes</option><option>45 minutes</option><option>90 minutes</option><option>135 minutes</option></select></div>
         <div><label class="sub">Room</label>
           <select id="room"><option selected>Seminar room</option><option>Lecture theatre</option><option>Computer room</option><option>Online</option></select></div>
       </div>
@@ -236,10 +236,11 @@ $("icePills").addEventListener("click",e=>{if(e.target.dataset.v)$("ice").value=
 // timing model
 function times(total){
   const t=parseInt(total);
-  if(t<=60)  return [5,18,12,8,0];
+  if(t<=20)  return [2,6,4,2,0];
+  if(t<=30)  return [2,9,6,4,0];
+  if(t<=45)  return [4,14,8,5,0];
   if(t<=90)  return [8,30,15,12,0];
-  if(t<=120) return [10,45,15,15,0];
-  return [12,75,20,20,0];
+  return [12,45,22,18,0];
 }
 let cur=0;
 const clock=m=>{const s=`${m} min`; return s;};
