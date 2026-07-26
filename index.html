@@ -169,6 +169,7 @@ ol.steps li{margin-bottom:9px;font-size:15.5px;line-height:1.55}
 /* ---------------- contractable accordion ---------------- */
 .acc{border:1px solid var(--rule);border-radius:4px;background:var(--white);
   margin:0 0 24px;max-width:74ch}
+.acc.wide{max-width:100%}
 .acc-h{width:100%;text-align:left;background:none;border:0;padding:16px 20px;cursor:pointer;
   font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--acc);display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -367,7 +368,7 @@ button:focus-visible,.dot:focus-visible,a:focus-visible{outline:2px solid var(--
  <div class="inner">
   <h2>What Makes GenAI different for interactive teaching?</h2>
   <div class="hr" style="margin-top:22px"></div>
-  <div class="acc">
+  <div class="acc wide">
    <button class="acc-h" type="button">The autonomy argument</button>
    <div class="acc-b">
     <p>Generative AI is not important because it is intelligent. It is important because it changes the relationship between educators and educational technology and the relationship between students and knowledge.</p>
@@ -405,7 +406,7 @@ button:focus-visible,.dot:focus-visible,a:focus-visible{outline:2px solid var(--
    <div class="row">
     <button class="btn solid" id="a1copy">Copy prompt</button>
     <button class="btn" id="a1next">Another one</button>
-    <button class="btn" id="a1timer">Start four minutes</button>
+    <button class="btn" id="a1timer">Start three minutes</button>
    </div>
    <div class="clock" id="a1clock">4:00</div>
   </div>
@@ -431,7 +432,7 @@ Then build the first one as one HTML page I can open on a phone.
 No login, no database, no sign up.</div>
    <div class="row">
     <button class="btn solid" id="a2copy">Copy prompt</button>
-    <button class="btn" id="a2timer">Start four minutes</button>
+    <button class="btn" id="a2timer">Start three minutes</button>
    </div>
    <div class="clock" id="a2clock">4:00</div>
   </div>
@@ -548,11 +549,13 @@ No login, no database, no sign up.</div>
    <p style="margin-bottom:18px">
      <a class="btn" href="6-crypto-compass-wallet-activity.html" target="_blank" rel="noopener">Crypto Compass: Wallet Explorer</a>
    </p>
+   <p class="replylab">&Agrave;ngels asked</p>
    <div class="prompt">I want to create an activity on crypto wallets. A list of the external wallets, and a glossary of terms, can you create that, of your money, your keys, hot and custodial wallets list (paypal, revolut, coinbase,) and exchanges (put the five bigger exchanges) on-chain exchanges (same) and then on the other side, a list of cold and (what is the opposite of custodial).
 I may do this in Padlet unless there is an artifact you could create where there is a scrambled list of this and they have to put it in order, which would be lovely, llike a game of identifying what goes on the right or left and moving the text to that side, and when it does, the box highlights, like there are empty boxes, and at the bottom all the concepts. Are you getting what I mean? there could be a more elegant solution to the artifact, I am sure you can find!!</div>
    <p class="replylab">Claude replied</p>
    <div class="reply">I can do a Crypto Compass Wallet Activity (25 mins), this should include the interactive sorting and pairing game you requested where students categorize hot/cold wallets, custodial/non-custodial, exchanges, etc.</div>
-   <div class="prompt" style="margin-top:14px">Go ahead.</div>
+   <p class="replylab">&Agrave;ngels replied</p>
+   <div class="prompt" style="margin-top:0">Go ahead.</div>
   </div>
  </div>
 </section>
@@ -646,7 +649,7 @@ I may do this in Padlet unless there is an artifact you could create where there
  <div class="inner">
   <h2>Gen AI is a conversational learning environment</h2>
   <div class="hr" style="margin-top:22px"></div>
-  <div class="acc">
+  <div class="acc wide">
    <button class="acc-h" type="button">Teaching has always relied on technologies</button>
    <div class="acc-b">
     <p>To bring pedagogy into the classroom we already rely on a great many technologies and frameworks: PowerPoint, Blackboard, Polling systems, quiz platforms, discussion boards, RADAR, images, maps, videos, diagrams and simulations.</p>
@@ -941,11 +944,11 @@ function drawAct(){
 drawAct();
 document.getElementById('a1next').onclick=drawAct;
 copier('a1copy',function(){return cur.p});
-timer('a1timer','a1clock',240);
+timer('a1timer','a1clock',180);
 
 /* ---------- activity two ---------- */
 copier('a2copy',function(){return document.getElementById('a2text').textContent});
-timer('a2timer','a2clock',240);
+timer('a2timer','a2clock',180);
 
 /* ---------- guess the time ---------- */
 var gwrap=document.getElementById('guess');
