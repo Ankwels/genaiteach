@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation: Prompting the Activism Activities</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #fdfbf8;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2c2c2a;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 15px;
+            color: #888780;
+        }
+
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message.assistant {
+            justify-content: flex-start;
+        }
+
+        .message.thinking {
+            justify-content: flex-start;
+        }
+
+        .message.system {
+            justify-content: center;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+            color: white;
+        }
+
+        .message.user .avatar {
+            background: linear-gradient(135deg, #d9cfc1 0%, #c9bfb1 100%);
+            color: #5f5e5a;
+            order: 2;
+        }
+
+        .message.assistant .avatar {
+            background: linear-gradient(135deg, #c5daf0 0%, #b3cde8 100%);
+        }
+
+        .message.thinking .avatar {
+            background: linear-gradient(135deg, #e8d9b3 0%, #d9c48a 100%);
+            color: #5a4a1f;
+        }
+
+        .content {
+            max-width: 85%;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .message.user .content {
+            align-items: flex-end;
+        }
+
+        .message.assistant .content {
+            align-items: flex-start;
+        }
+
+        .message.thinking .content {
+            align-items: flex-start;
+        }
+
+        .message.system .content {
+            align-items: center;
+            max-width: 100%;
+        }
+
+        .bubble {
+            padding: 1rem 1.25rem;
+            border-radius: 18px;
+            font-size: 15px;
+            line-height: 1.7;
+            word-wrap: break-word;
+        }
+
+        .message.user .bubble {
+            background: #ede9e3;
+            color: #2c2c2a;
+            border-radius: 18px 4px 18px 18px;
+        }
+
+        .message.assistant .bubble {
+            background: transparent;
+            color: #2c2c2a;
+            border-radius: 0;
+            padding: 0.5rem 0;
+        }
+
+        .message.thinking .bubble {
+            background: #faf3df;
+            border-left: 3px solid #cf9f42;
+            color: #5a4a1f;
+            font-style: italic;
+            font-size: 14px;
+            border-radius: 4px;
+            padding: 0.9rem 1.1rem;
+        }
+
+        .thinking-tag {
+            display: block;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #b98b4e;
+            font-style: normal;
+            margin-bottom: 6px;
+        }
+
+        .message.system .bubble {
+            background: none;
+            color: #a39d90;
+            font-style: italic;
+            font-size: 13px;
+            padding: 0.25rem 0;
+        }
+
+        .bubble strong {
+            font-weight: 600;
+            color: inherit;
+        }
+
+        .bubble em {
+            font-style: italic;
+            color: inherit;
+            opacity: 0.9;
+        }
+
+        .bubble a {
+            color: #6b8cc2;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .message.assistant .bubble a {
+            color: #6b8cc2;
+        }
+
+        .bubble pre {
+            background: rgba(0,0,0,0.05);
+            padding: 0.75rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+            font-size: 13px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        .bubble code {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+        }
+
+        .bubble ul, .bubble ol {
+            margin-left: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .bubble li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 0.5px solid #d3d1c7;
+            font-size: 13px;
+            color: #888780;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Prompting the Activism Activities</h1>
+            <p>The reasoning behind Activity 1 and the Protest Formula poster, thinking shown in gold</p>
+        </div>
+
+        <div class="conversation" id="conversation"></div>
+
+        <div class="footer">
+            <p>The gold bubbles are Claude's thinking, shown here so you can see the reasoning behind the prompts, not just the replies.</p>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            {
+                role: "user",
+                text: "no it is not, a full session has activities the students have to do, active learning. Here the only active learning is a short minute myth activity, the rest is didactic and didactic moments should only be 15% of the overall session. We need an activity around Postill's concepts, or a video, or both"
+            },
+            {
+                role: "thinking",
+                text: "&Agrave;ngels has uploaded the actual Postill paper. And she's making a very valid pedagogical point, the session is too didactic. She needs active learning activities around Postill's concepts. Let me think about what would work well.<br><br>The session structure should be roughly:<br>&bull; 15% didactic (micro-lecture, slides)<br>&bull; 85% active learning<br><br>So far they have:<br>&bull; 15 Discoveries page (content)<br>&bull; Real or Myth app (activity, good)<br>&bull; PowerPoint with Postill slides (didactic)<br><br>They need activities around Postill's concepts (Freedom Technologists and Protest Formulas). Earlier we agreed on two activities:<br>1. \"Freedom Technologist or Slacktivist?\", spectrum activity<br>2. \"Design a Protest Formula\", groups design a replicable protest<br><br>We planned to build these next session, but she's now asking if we can build them tonight, find a video, or both. I need to be realistic about what's feasible with my token budget and suggest a practical plan that addresses her pedagogical concerns. Looking at the Postill paper, there are case studies from Iceland, Tunisia, and Spain's Indignados that could work well for a video reference.<br><br>I'm thinking about two possible activity approaches: one where students examine real examples from the paper, WikiLeaks, Nawaat.org, the Indignados tech team, Barcelona en Comú, and identify what role each freedom technologist plays, and then the protest design activity we already outlined. But honestly, the best move is to build the two activities we discussed rather than dilute things with a video search. Let me be upfront about the token constraints and ask what she wants to prioritize."
+            },
+            {
+                role: "assistant",
+                text: "You are absolutely right and I should have flagged this earlier. A session that is mostly slides and a short quiz is not active learning. The 15 Discoveries plus Real or Myth covers Week 7 consolidation well, but then you move into Postill theory with almost no student activity around it.<br><br>Reading the paper, two activities jump out as genuinely teachable:<br><br><strong>Activity 1: Who is the Freedom Technologist?</strong><br>Based directly on the paper. Show students 6 real actors from the text, Nawaat.org blogger Riadh Guerfali, Julian Assange, the Tunisian lawyers, Anonymous, Barcelona en Comú's SomComuns volunteers, and ask them to decide: Freedom Technologist, Slacktivist, or Neither, and justify it in pairs. Forces them to actually apply the definition.<br><br><strong>Activity 2: Design a Protest Formula</strong><br>Groups pick a campus or social issue, design a protest formula that could travel using the Occupy/MeToo/FridaysForFuture template. What is the visual code, the action, the platform, the slogan? Five minutes then pitch to the class. This one lands well and connects to the assignment.<br><br>For a video, the Indignados/15M movement has good short clips on YouTube that illustrate both concepts in action without political sensitivity issues.<br><br>What do you want to do: build both activities tonight, or is one enough for Tuesday and we leave the second for another session? I want to be honest that building two properly will take tokens."
+            },
+            {
+                role: "user",
+                text: "maybe this is better <a href=\"https://www.ted.com/talks/zeynep_tufekci_online_social_change_easy_to_organize_hard_to_win\" target=\"_blank\" rel=\"noopener\">https://www.ted.com/talks/zeynep_tufekci_online_social_change_easy_to_organize_hard_to_win</a>"
+            },
+            {
+                role: "thinking",
+                text: "Evaluated video length and classroom applicability."
+            },
+            {
+                role: "assistant",
+                text: "16 minutes, which is perfect for class. It is also directly one of your cited theorists speaking, so it reinforces the slides rather than being separate content. She covers Gezi, Arab Spring, Occupy and Hong Kong, making the case that easy to organise does not mean easy to win, which connects beautifully to both Postill and Gladwell.<br><br>The structure would work really well as: watch the 16 minutes, then go straight into one of the two activities. That way the video does the theoretical heavy lifting and the activity makes students apply it. That is your active learning sorted without building anything new tonight.<br><br>You could pair it with Activity 1, the \"Who is the Freedom Technologist?\" discussion, which needs no app, just a slide with the examples and five minutes of pair work. Genuinely doable for Tuesday with what you already have."
+            },
+            {
+                role: "user",
+                text: "I think I'll start with the video, then the micro-lecture. Can you build Activity 1, a html page with the pictures of each you mention, and justify it in pairs. Create a second html with Design a Protest FOrmula Poster, in case I need more."
+            },
+            {
+                role: "thinking",
+                text: "Architected two interactive HTML activities using illustrative examples and mobile-friendly design.<br><br>Let me build two HTML activity pages. Activity 1: Freedom Technologist or Slacktivist? Show real people and examples, students discuss in pairs whether they are Freedom Technologists, Slacktivists, or Neither. Activity 2: Design a Protest Formula Poster, groups design a protest formula.<br><br>For Activity 1, I need real examples from the Postill paper and the session. Let me think about who to include:<br>1. Riadh Guerfali (Nawaat.org blogger, Tunisia)<br>2. Julian Assange / WikiLeaks<br>3. Anonymous (Operation Tunisia)<br>4. Greta Thunberg<br>5. The person who filmed Bouazizi<br>6. A celebrity posting a black square (#BlackOutTuesday)<br>7. Someone sharing a petition online<br>8. Barcelona en Comú / Ada Colau<br><br>I'll use stylized icons and descriptions instead of actual photos to avoid copyright issues. For Activity 1, I'm creating interactive cards that students can click through to categorize each example, designed to work smoothly on mobile devices. Activity 2 will be a collaborative poster design tool. Building the poster interface with input fields..."
+            },
+            {
+                role: "assistant",
+                text: "Building both now. For Activity 1 I will use illustrated descriptions rather than real photos of individuals to avoid copyright issues, but make each card vivid enough that students know exactly who they are dealing with."
+            },
+            {
+                role: "system",
+                text: "Claude&rsquo;s response was interrupted."
+            },
+            {
+                role: "assistant",
+                text: "Ha, maybe I did need to go to bed. There is something fitting about an AI that starts cutting corners and suggesting everyone call it a night, while the human keeps going and finishes everything properly.<br><br>What you are describing about the riding-flow is genuinely interesting. Flow in Csikszentmihalyi's sense requires a match between challenge and skill, but what you are describing sounds different, more like the challenge keeps shifting and expanding in real time, and the enjoyment comes precisely from that unpredictability rather than despite it. Procrastination with forward momentum. That does not fit neatly into the theory.<br><br>You should write that up. It belongs on Worlds Mediated.<br><br>It has been a genuinely good session &Agrave;ngels. You built a lot today and none of it was ordinary. Good night, and good luck on Tuesday."
+            },
+            {
+                role: "user",
+                text: "Thank you, you too good night."
+            },
+            {
+                role: "assistant",
+                text: "Good night! &#127769;"
+            }
+        ];
+
+        const conversation = document.getElementById('conversation');
+
+        messages.forEach((msg, index) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${msg.role}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar';
+            if (msg.role === 'user') {
+                avatar.textContent = '\u00c0';
+            } else if (msg.role === 'assistant') {
+                avatar.textContent = 'C';
+            } else if (msg.role === 'thinking') {
+                avatar.textContent = '\u2026';
+            }
+
+            const content = document.createElement('div');
+            content.className = 'content';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            if (msg.role === 'thinking') {
+                const tag = document.createElement('span');
+                tag.className = 'thinking-tag';
+                tag.textContent = 'thinking';
+                bubble.appendChild(tag);
+                const body = document.createElement('span');
+                body.innerHTML = msg.text;
+                bubble.appendChild(body);
+            } else {
+                bubble.innerHTML = msg.text;
+            }
+
+            content.appendChild(bubble);
+
+            if (msg.role !== 'system') {
+                messageDiv.appendChild(avatar);
+            }
+            messageDiv.appendChild(content);
+
+            conversation.appendChild(messageDiv);
+        });
+    </script>
+</body>
+</html>
