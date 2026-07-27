@@ -92,6 +92,9 @@ body.hidenotes .note{display:none}
   margin:0 0 16px;max-width:72ch}
 .tool{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--mid);margin:0}
 .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.row.tools{margin-top:11px}
+.row.tools .rowlab{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--mid);margin-right:2px}
 
 button.btn{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
   text-transform:uppercase;background:none;color:var(--acc);border:1px solid var(--acc);
@@ -409,7 +412,13 @@ button:focus-visible,.dot:focus-visible,a:focus-visible{outline:2px solid var(--
     <button class="btn" id="a1next">Another one</button>
     <button class="btn" id="a1timer">Start three minutes</button>
    </div>
-   <div class="clock" id="a1clock">4:00</div>
+   <div class="row tools">
+    <span class="rowlab">Paste it into</span>
+    <a class="btn" href="https://claude.ai/new" target="_blank" rel="noopener">Claude</a>
+    <a class="btn" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a>
+    <a class="btn" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Copilot</a>
+   </div>
+   <div class="clock" id="a1clock">3:00</div>
   </div>
 
   <p>You can also give any of these activities to your students and ask them to build one themselves, and let them propose what they would do with it and what they would use it for.</p>
@@ -435,7 +444,13 @@ No login, no database, no sign up.</div>
     <button class="btn solid" id="a2copy">Copy prompt</button>
     <button class="btn" id="a2timer">Start three minutes</button>
    </div>
-   <div class="clock" id="a2clock">4:00</div>
+   <div class="row tools">
+    <span class="rowlab">Paste it into</span>
+    <a class="btn" href="https://claude.ai/new" target="_blank" rel="noopener">Claude</a>
+    <a class="btn" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a>
+    <a class="btn" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Copilot</a>
+   </div>
+   <div class="clock" id="a2clock">3:00</div>
   </div>
 
   <p>Then paste one line into the chat: what you asked for, and whether what came back was any use.</p>
@@ -460,7 +475,7 @@ No login, no database, no sign up.</div>
    <p class="lead wide">Not really, what you gain with using AI is increased <span class="emph">autonomy</span>.</p>
    <div class="body">
     <p>Working with Gen AI has its learning curve. There are frustrations, there are emotional reactions to technology to account with. There is experimentation, failure, revision and redesign.</p>
-    <p>However, AI, quick as it may be &lsquo;it won&rsquo;t save you time&rsquo;. However, you get to create teaching objects for which, in the past, you needed software permissions, or company access, or had endless editing constrains, or you had to hire people (for example to make you a bot, or to create a search engine, software for making a quiz in the class, subscription to wooclap).</p>
+    <p>However, AI, quick as it may be &lsquo;it won&rsquo;t save you time&rsquo;. Instead you get to create teaching objects for which, in the past, you needed software permissions, or company access, or had endless editing constrains, or you had to hire people (for example to make you a bot, or to create a search engine, software for making a quiz in the class, subscription to wooclap).</p>
     <p>A focus on time reduces the conversation to productivity. However, productivity is not the most interesting thing happening when we work with AI.</p>
    </div>
 
@@ -473,8 +488,11 @@ No login, no database, no sign up.</div>
     </div>
    </div>
 
-   <div class="body">
-    <p>One of the paradox of working with Ai is that some seemingly complex activities can take seconds to make. Where it took me much longer is because I didn&rsquo;t quite know myself what should exist on the page. Building teaching activities with AI and putting them in Blackboard is not hard thing, the hard thing is finding the pedagogical shape that works well, iterating the shape (with AI) is very helpful but in some cases it will take time. However I thoroughly enjoy the process that gets me to produce something aesthetically and conceptually much clearer  I would have never been able to produce before by myself. I enjoy it because it is done through a conversation not through battling software.</p>
+   <div class="acc">
+    <button class="acc-h" type="button">One of the paradox of working with Ai</button>
+    <div class="acc-b">
+     <p>One of the paradox of working with Ai is that some seemingly complex activities can take seconds to make. Where it took me much longer is because I didn&rsquo;t quite know myself what should exist on the page. Building teaching activities with AI and putting them in Blackboard is not hard thing, the hard thing is finding the pedagogical shape that works well, iterating the shape (with AI) is very helpful but in some cases it will take time. Despite challenges with AI (Hallucination, agreability, training bias, pattern averaging, synthetic slop, environmental impact) I thoroughly enjoy the process that gets me to produce something aesthetically and conceptually much clearer  I would have never been able to produce before by myself. I enjoy it because it is done through a conversation not through battling software.</p>
+    </div>
    </div>
    <p class="lead wide">The point is not how many hours were saved, but how much autonomy from pre-existing tools and strategies you and your students gained.</p>
   </div>
