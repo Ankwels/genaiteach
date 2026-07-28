@@ -772,14 +772,6 @@ I may do this in Padlet unless there is an artifact you could create where there
  </div>
 </section>
 
-<!-- hidden static duplicate so Netlify's build-time form parser detects the field set -->
-<form name="genai-feedback" data-netlify="true" netlify-honeypot="fbbot" hidden>
- <input type="hidden" name="form-name" value="genai-feedback">
- <input name="fbbot">
- <input name="reaction">
- <textarea name="comment"></textarea>
-</form>
-
 <!-- ============ 17 ============ -->
 <section class="slide" data-acc="a0" data-tint="s0">
  <div class="inner">
@@ -1127,11 +1119,12 @@ document.querySelectorAll('#wrapButtons button').forEach(function(b){
     var body=new URLSearchParams(new FormData(form)).toString();
     status.textContent='Sending\u2026';
     fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
-      .then(function(){
+      .then(function(res){
+        if(!res.ok){ throw new Error('Server said '+res.status); }
         form.hidden=true; thanks.hidden=false; status.textContent='';
       })
-      .catch(function(){
-        status.textContent='Could not send, this only works once the app is hosted on Netlify.';
+      .catch(function(err){
+        status.textContent='Not saved ('+err.message+'). Form detection is probably off in Netlify.';
       });
   });
 })();
